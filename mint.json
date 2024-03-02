@@ -44,8 +44,20 @@
         "introduction",
         "quickstart"
       ]
+    },
+    {
+      "group": "Trips",
+      "pages": [
+        "trips/get-all-trips"
+      ]
     }
   ],
+  "api": {
+    "baseUrl": "https://mintlify.com/api",
+    "auth": {
+      "method": "bearer"
+    }
+  },
   "footerSocials": {
     "twitter": "https://twitter.com/mintlify",
     "github": "https://github.com/mintlify",
