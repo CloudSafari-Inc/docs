@@ -18,19 +18,13 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "mailto:hello@cloudsafaris.com"
     }
   ],
   "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "name": "Home",
+    "url": "https://cloudsafaris.com"
   },
-  "tabs": [
-    {
-      "name": "API Reference",
-      "url": "api-reference"
-    }
-  ],
   "anchors": [
     {
       "name": "Home",
@@ -41,7 +35,7 @@
       "name": "Contact Us",
       "icon": "envelope",
       "url": "mailto:hello@cloudsafaris.com"
-    },
+    }
   ],
   "navigation": [
     {
