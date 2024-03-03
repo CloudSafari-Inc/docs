@@ -5,7 +5,7 @@
     "dark": "https://cloudsafaris.com/combo-logo-white.png",
     "light": "https://cloudsafaris.com/combo-logo-neutral-900.png"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "https://cloudsafaris.com/favicon.ico",
   "colors": {
     "primary": "#0D9373",
     "light": "#07C983",
