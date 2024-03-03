@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
+  "name": "CloudSafaris API Documentation",
   "logo": {
     "dark": "https://cloudsafaris.com/combo-logo-white.png",
     "light": "https://cloudsafaris.com/combo-logo-neutral-900.png"
