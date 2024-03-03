@@ -53,14 +53,13 @@
     }
   ],
   "api": {
-    "baseUrl": "https://mintlify.com/api",
+    "baseUrl": "https://api3.cloudsafaris.com/v1",
     "auth": {
       "method": "bearer"
     }
   },
   "footerSocials": {
-    "twitter": "https://twitter.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "linkedin": "https://www.linkedin.com/company/cloudsafaris/",
+    "instagra": "https://www.instagram.com/cloudsafaris/"
   }
 }
