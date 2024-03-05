@@ -28,7 +28,7 @@ api: 'GET https://api3.cloudsafaris.com/v1/get-all-trips'
     The max price is based on 2 people going on a trip in a high season, this is an estimate. The max price may end up being more.
 </ParamField>
 
-<ParamField body="required_guides" type="string[]" default="none">
+<ParamField body="required_guides" type="<'SAFARI', 'KILIMANJARO'>[]" default="none">
     An array of string values of either `SAFARI` or `KILIMANJARO`, or both. This will return trips that are associated with the required guide tags that are passed.
     For example, passing in `["KILIMANJARO"]` will only return trips that require a guide for Kilimanjaro.
 </ParamField>
