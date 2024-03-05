@@ -49,7 +49,16 @@
       "pages": [
         "trips/get-all-trips",
         "trips/get-all-short-trips",
-        "trips/get-trip-with-id"
+        "trips/get-trip-with-id",
+        "trips/get-trips-with-ids"
+      ]
+    },
+    {
+      "group": "Destinations",
+      "pages": [
+        "destinations/get-all-destinations",
+        "destinations/get-destination-by-id",
+        "destinations/get-destinations-by-ids"
       ]
     }
   ],
