@@ -3,6 +3,11 @@ title: 'Get All Trips'
 api: 'GET https://api3.cloudsafaris.com/v1/get-all-trips'
 ---
 
+### Header Parameters
+<ParamField header="CloudSafaris-API-Version" type="string" default="v1">
+  Currently the only acceptable value is `v1`.
+</ParamField>
+
 ### Request Body Parameters
 
 <ParamField body="limit" type="number" default={200}>
@@ -17,37 +22,63 @@ api: 'GET https://api3.cloudsafaris.com/v1/get-all-trips'
     An array of string values of either `TZ` or `KE`, or both.
 </ParamField>
 
+<ParamField body="max_price" type="number" default="none">
+    The maximum price of the trips that are returned within a given calendar year. 
+    For example if you set this as `3000` only packages that have a max price under `3000` will be returned.
+    The max price is based on 2 people going on a trip in a high season, this is an estimate. The max price may end up being more.
+</ParamField>
+
+<ParamField body="required_guides" type="string[]" default="none">
+    An array of string values of either `SAFARI` or `KILIMANJARO`, or both. This will return trips that are associated with the required guide tags that are passed.
+    For example, passing in `["KILIMANJARO"]` will only return trips that require a guide for Kilimanjaro.
+</ParamField>
+
+<ParamField body="destinations" type="number[]" default="none">
+    The ids of the destinations. If supplied this will only return trips that contain at least one of the given destination ids.
+</ParamField>
+
+<ParamField body="properties" type="number[]" default="none">
+    The ids of the properties. If supplied this will only return trips that contain at least one of the given properties.
+</ParamField>
+
 <RequestExample>
   ```json
   {
-    header: Auth
+    "limit"": 2,
+    "country": ['TZ'],
+    "max_price": 3000,
+    "destinations": [2]
   }
   ```
 </RequestExample>
 
 
 ### Response Body Parameters
-<ResponseField name="id" type="number">
-  The trip id is the unique id of the trip returned.
+<ResponseField name="offset" type="number">
+    The offset of the trips, if making a subsequent request to get more trips use the offset to get the next batch of trips.
 </ResponseField>
+<ResponseField name="data" type="Trip Object Array">
+  <Expandable title="properties" defaultOpen={true}>
+
+    <ResponseField name="id" type="number">
+        The trip id is the unique id of the trip returned.
+    </ResponseField>
+
+    <ResponseField name="name" type="string">
+        The name of the the trip.
+    </ResponseField>
+
+  </Expandable>
+</ResponseField>
+
 
 <ResponseExample>
 ```json
-{ "status": "success" }
+{ 
+    "status": "success" 
+}
 ```
 </ResponseExample>
-
-<ResponseField name="user" type="User Object">
-  <Expandable title="properties">
-    <ResponseField name="full_name" type="string">
-      The full name of the user
-    </ResponseField>
-
-    <ResponseField name="is_over_21" type="boolean">
-      Whether the user is over 21 years old
-    </ResponseField>
-  </Expandable>
-</ResponseField>
 
 
 
