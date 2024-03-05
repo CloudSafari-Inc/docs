@@ -88,6 +88,20 @@
         "webhooks/update-booking-status",
         "webhooks/trip-message-updates"
       ]
+    },
+    {
+      "group": "Manage Trip",
+      "pages": [
+        "manage/cancel-trip-booking",
+        "manage/modify-trip-booking",
+        "manage/send-a-trip-message"
+      ]
+    },
+    {
+      "group": "Payments",
+      "pages": [
+        "pricing/get-pricing-for-trip"
+      ]
     }
   ],
   "api": {

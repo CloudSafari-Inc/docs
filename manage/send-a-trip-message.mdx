@@ -1,0 +1,56 @@
+---
+title: 'Send a Trip Message'
+api: 'POST https://api3.cloudsafaris.com/v1/manage/send-trip-message'
+---
+
+If you need to send a message regarding a trip that's intended for CloudSafaris or the local supplier, send a `POST` request to this endpoint with the following parameters:
+
+### Header Parameters
+<ParamField header="CloudSafaris-API-Version" type="string" default="v1">
+  Currently the only acceptable value is `v1`.
+</ParamField>
+
+
+### Request Parameters
+<ParamField body="booking_uuid" type="uuid">
+    The uuid (unique id) associated with the booking.
+</ParamField>
+<ParamField body="message_date" type="string">
+    The date and time that the message was sent on (ISO formatted).
+</ParamField>
+<ParamField body="message" type="string">
+    The message to be delivered.
+</ParamField>
+<ParamField body="receiver" type="string">
+    Who the message is intended for with possible values of `SUPPLIER` or `SUPPORT`.
+    If `SUPPORT` this message will be received by our team at CloudSafaris.
+</ParamField>
+
+<RequestExample>
+```json
+{
+    "booking_uuid": "123e4567-e89b-12d3-a456-426614174000",
+    "message_date": "2023-09-15T00:00:00.000Z",
+    "message": "The final payment was sent for this trip.",
+    "receiver": "SUPPORT"
+}
+```
+</RequestExample>
+
+### Response Parameters
+<ResponseField name="success" type="boolean">
+    Whether the message was delivered successfully or not.
+</ResponseField>
+<ResponseField name="message" type="boolean">
+    A message associated with this request, if any.
+</ResponseField>
+
+
+<ResponseExample>
+```json
+{
+    "success": true,
+    "message": "Message received by our team"
+}
+```
+</ResponseExample>
