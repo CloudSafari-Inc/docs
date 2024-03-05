@@ -79,8 +79,14 @@
       "group": "Booking",
       "pages": [
         "booking/book-a-trip",
-        "booking/get-trip-status",
-        "booking/update-booking-status"
+        "booking/get-trip-status"
+      ]
+    },
+    {
+      "group": "Webhooks",
+      "pages": [
+        "webhooks/update-booking-status",
+        "webhooks/trip-message-updates"
       ]
     }
   ],

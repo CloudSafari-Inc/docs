@@ -1,0 +1,56 @@
+---
+title: 'Webhook Trip Message Update'
+api: 'POST <YOUR-API-ENDPOINT>'
+---
+
+If we need to send a message to communicate some detail of a trip with the traveller or the platform, 
+we'll `POST` messages to webhook provided for your platform to consume and handle.
+
+
+### Header Parameters
+<ParamField header="Authorization" type="string" default="v1" required>
+  An agreed upon webhook key we'll provide to you to verify that the request is coming from us via the Authorization header in the form of a `Bearer` token.
+</ParamField>
+
+### Request Parameters
+The parameters listed below are what we will send from our API to your webhook.
+
+<ParamField body="booking_uuid" type="uuid">
+    The uuid (unique id) associated with the booking.
+</ParamField>
+<ParamField body="message_date" type="string">
+    The date and time that the message was sent on (ISO formatted).
+</ParamField>
+<ParamField body="message" type="string">
+    The message to be delivered.
+</ParamField>
+<ParamField body="receiver" type="string">
+    Who the message is intended for with possible values of `TRAVELLER` or `PLATFORM`.
+    If `PLATFORM` this message is not intended for the traveller.
+</ParamField>
+
+<RequestExample>
+```json
+{
+    "booking_uuid": "123e4567-e89b-12d3-a456-426614174000",
+    "message_date": "2023-09-15T00:00:00.000Z",
+    "message": "The local tour operator has received all information, the trip is good to go.",
+    "receiver": "PLATFORM"
+}
+```
+</RequestExample>
+
+### Response Parameters
+The response parameter below is what we expect to receive from your webhook endpoint as a response message in addition to a 200 success code for the request.
+
+<ResponseField name="success" type="boolean">
+    A success field with the value of `true` indicating the request was handled successfully at the webhook provided.
+</ResponseField>
+
+<ResponseExample>
+```json
+{
+    "success": true
+}
+```
+</ResponseExample>
