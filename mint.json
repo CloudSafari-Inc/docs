@@ -60,6 +60,14 @@
         "destinations/get-destination-by-id",
         "destinations/get-destinations-by-ids"
       ]
+    },
+    {
+      "group": "Properties",
+      "pages": [
+        "properties/get-all-properties",
+        "properties/get-property-by-id",
+        "properties/get-all-properties-by-ids"
+      ]
     }
   ],
   "api": {
