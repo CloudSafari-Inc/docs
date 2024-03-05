@@ -74,6 +74,13 @@
       "pages": [
         "pricing/get-pricing-for-trip"
       ]
+    },
+    {
+      "group": "Booking",
+      "pages": [
+        "booking/book-a-trip",
+        "booking/get-trip-status"
+      ]
     }
   ],
   "api": {

@@ -1,0 +1,61 @@
+---
+title: 'Get Trip Status'
+api: 'POST https://api3.cloudsafaris.com/v1/book/get-trip-status'
+---
+
+This 
+
+### Header Parameters
+<ParamField header="CloudSafaris-API-Version" type="string" default="v1">
+  Currently the only acceptable value is `v1`.
+</ParamField>
+
+### Request Body Parameters
+<ParamField body="booking_uuid" type="uuid">
+    The uuid (unique id) associated with your booking.
+</ParamField>
+
+<RequestExample>
+```json
+{
+    "booking_uuid": "123e4567-e89b-12d3-a456-426614174000"
+}
+```
+</RequestExample>
+
+### Response Body Example
+
+<ResponseField name="success" type="boolean">
+    Whether the request was successful or not.
+</ResponseField>
+<ResponseField name="message" type="string">
+    A message associated with the trip or request, if any.
+</ResponseField>
+<ResponseField name="trip_status" type="string">
+    The status of the trip. Possible values are as follows:
+    `PENDING`, `CONFIRMED`, `CANCELLED`, `COMPLETED`
+</ResponseField>
+<ResponseField name="amount_owing" type="object">
+    <Expandable name="properties" defaultOpen={true}>
+        <ResponseField name="price" type="number">
+            The amount owing on this trip. This is returned as a whole dollar value.
+        </ResponseField>
+        <ResponseField name="currency" type="string">
+            The currency associated with this trip (I.e. `USD`).
+        </ResponseField>
+    </Expandable>
+</ResponseField>
+
+<ResponseExample>
+```json
+{
+    "success": true,
+	"message": "",
+	"trip_status": "CONFIRMED",
+	"amount_owing": {
+		"price": 12000, 
+		"currency": "USD"
+	}
+}
+```
+</ResponseExample>
