@@ -54,7 +54,7 @@
   "api": {
     "baseUrl": "https://api3.cloudsafaris.com/v1",
     "auth": {
-      "method": "bearer",
+      "method": "bearer"
     }
   },
   "footerSocials": {
