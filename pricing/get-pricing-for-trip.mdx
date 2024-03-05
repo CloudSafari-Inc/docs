@@ -122,88 +122,101 @@ If the Rack Rate is not returned, you are free to markup and sell a trip with no
         <Expandable name="properties" defaultOpen={true}>
 
             <ResponseField name="travellers" type="object">
-                <ResponseField name="uuid" type="uuid">
-                    The uuid (unique identifier) for the traveller.
-                </ResponseField>
+                <Expandable name="properties" defaultOpen={true}>
+                    <ResponseField name="uuid" type="uuid">
+                        The uuid (unique identifier) for the traveller.
+                    </ResponseField>
 
-                <ResponseField name="trip_cost" type="object">
-                    Overall cost associated with the trip for the traveller (excludes any extras for the travellers).
-                    <ResponseField name="name" type="string">
-                        A name associated with the cost.
+                    <ResponseField name="trip_cost" type="object">
+                        Overall cost associated with the trip for the traveller (excludes any extras for the travellers).
+                        <Expandable name="properties" defaultOpen={true}>
+                            <ResponseField name="name" type="string">
+                                A name associated with the cost.
+                            </ResponseField>
+                            <ResponseField name="cost" type="number">
+                                The cost amount.
+                            </ResponseField>
+                            <ResponseField name="currency" type="string">
+                                The currency associated with the cost (I.e. `USD`).
+                            </ResponseField>
+                        </Expandable>
                     </ResponseField>
-                    <ResponseField name="cost" type="number">
-                        The cost amount.
-                    </ResponseField>
-                    <ResponseField name="currency" type="string">
-                        The currency associated with the cost (I.e. `USD`).
-                    </ResponseField>
-                </ResponseField>
 
-                <ResponseField name="extra_cost" type="object">
-                    Overall cost associated with the extras selected for the traveller.
-                    <ResponseField name="name" type="string">
-                        A name associated with the cost.
+                    <ResponseField name="extra_cost" type="object">
+                        Overall cost associated with the extras selected for the traveller.
+                        <Expandable name="properties" defaultOpen={true}>
+                            <ResponseField name="name" type="string">
+                                A name associated with the cost.
+                            </ResponseField>
+                            <ResponseField name="cost" type="number">
+                                The cost amount.
+                            </ResponseField>
+                            <ResponseField name="currency" type="string">
+                                The currency associated with the cost (I.e. `USD`).
+                            </ResponseField>
+                        </Expandable>
                     </ResponseField>
-                    <ResponseField name="cost" type="number">
-                        The cost amount.
-                    </ResponseField>
-                    <ResponseField name="currency" type="string">
-                        The currency associated with the cost (I.e. `USD`).
-                    </ResponseField>
-                </ResponseField>
 
-                <ResponseField name="day_cost" type="object">
-                    Overall cost associated with any extras selected on a day level for the traveller.
-                    <ResponseField name="name" type="string">
-                        A name associated with the cost.
+                    <ResponseField name="day_cost" type="object">
+                        Overall cost associated with any extras selected on a day level for the traveller.
+                        <Expandable name="properties" defaultOpen={true}>
+                            <ResponseField name="name" type="string">
+                                A name associated with the cost.
+                            </ResponseField>
+                            <ResponseField name="cost" type="number">
+                                The cost amount.
+                            </ResponseField>
+                            <ResponseField name="currency" type="string">
+                                The currency associated with the cost (I.e. `USD`).
+                            </ResponseField>
+                            </Expandable>
                     </ResponseField>
-                    <ResponseField name="cost" type="number">
-                        The cost amount.
-                    </ResponseField>
-                    <ResponseField name="currency" type="string">
-                        The currency associated with the cost (I.e. `USD`).
-                    </ResponseField>
-                </ResponseField>
-
+                </Expandable>
             </ResponseField>
 
             <ResponseField name="trip_cost" type="object">
                 Overall cost associated with the trip (not on an individual traveller level).
-                <ResponseField name="name" type="string">
-                    A name associated with the cost.
-                </ResponseField>
-                <ResponseField name="cost" type="number">
-                    The cost amount.
-                </ResponseField>
-                <ResponseField name="currency" type="string">
-                    The currency associated with the cost (I.e. `USD`).
-                </ResponseField>
+                <Expandable name="properties" defaultOpen={true}>
+                    <ResponseField name="name" type="string">
+                        A name associated with the cost.
+                    </ResponseField>
+                    <ResponseField name="cost" type="number">
+                        The cost amount.
+                    </ResponseField>
+                    <ResponseField name="currency" type="string">
+                        The currency associated with the cost (I.e. `USD`).
+                    </ResponseField>
+                </Expandable>
             </ResponseField>
 
             <ResponseField name="extra_cost" type="object">
                 Overall cost associated with the extras selected for the trip (not on an individual traveller level).
-                <ResponseField name="name" type="string">
-                    A name associated with the cost.
-                </ResponseField>
-                <ResponseField name="cost" type="number">
-                    The cost amount.
-                </ResponseField>
-                <ResponseField name="currency" type="string">
-                    The currency associated with the cost (I.e. `USD`).
-                </ResponseField>
+                <Expandable name="properties" defaultOpen={true}>
+                    <ResponseField name="name" type="string">
+                        A name associated with the cost.
+                    </ResponseField>
+                    <ResponseField name="cost" type="number">
+                        The cost amount.
+                    </ResponseField>
+                    <ResponseField name="currency" type="string">
+                        The currency associated with the cost (I.e. `USD`).
+                    </ResponseField>
+                </Expandable>
             </ResponseField>
 
             <ResponseField name="day_cost" type="object">
                 Overall cost associated with any extras selected on a day level (not on an individual traveller level).
-                <ResponseField name="name" type="string">
-                    A name associated with the cost.
-                </ResponseField>
-                <ResponseField name="cost" type="number">
-                    The cost amount.
-                </ResponseField>
-                <ResponseField name="currency" type="string">
-                    The currency associated with the cost (I.e. `USD`).
-                </ResponseField>
+                <Expandable name="properties" defaultOpen={true}>
+                    <ResponseField name="name" type="string">
+                        A name associated with the cost.
+                    </ResponseField>
+                    <ResponseField name="cost" type="number">
+                        The cost amount.
+                    </ResponseField>
+                    <ResponseField name="currency" type="string">
+                        The currency associated with the cost (I.e. `USD`).
+                    </ResponseField>
+                </Expandable>
             </ResponseField>
         
         </Expandable>
@@ -215,92 +228,106 @@ If the Rack Rate is not returned, you are free to markup and sell a trip with no
         <Expandable name="properties" defaultOpen={true}>
 
             <ResponseField name="travellers" type="object">
-                <ResponseField name="uuid" type="uuid">
-                    The uuid (unique identifier) for the traveller.
-                </ResponseField>
+                <Expandable name="properties" defaultOpen={true}>
+                    <ResponseField name="uuid" type="uuid">
+                        The uuid (unique identifier) for the traveller.
+                    </ResponseField>
 
-                <ResponseField name="trip_cost" type="object">
-                    Overall cost associated with the trip for the traveller (excludes any extras for the travellers).
-                    <ResponseField name="name" type="string">
-                        A name associated with the cost.
+                    <ResponseField name="trip_cost" type="object">
+                        Overall cost associated with the trip for the traveller (excludes any extras for the travellers).
+                        <Expandable name="properties" defaultOpen={true}>
+                            <ResponseField name="name" type="string">
+                                A name associated with the cost.
+                            </ResponseField>
+                            <ResponseField name="cost" type="number">
+                                The cost amount.
+                            </ResponseField>
+                            <ResponseField name="currency" type="string">
+                                The currency associated with the cost (I.e. `USD`).
+                            </ResponseField>
+                        </Expandable>
                     </ResponseField>
-                    <ResponseField name="cost" type="number">
-                        The cost amount.
-                    </ResponseField>
-                    <ResponseField name="currency" type="string">
-                        The currency associated with the cost (I.e. `USD`).
-                    </ResponseField>
-                </ResponseField>
 
-                <ResponseField name="extra_cost" type="object">
-                    Overall cost associated with the extras selected for the traveller.
-                    <ResponseField name="name" type="string">
-                        A name associated with the cost.
+                    <ResponseField name="extra_cost" type="object">
+                        Overall cost associated with the extras selected for the traveller.
+                        <Expandable name="properties" defaultOpen={true}>
+                            <ResponseField name="name" type="string">
+                                A name associated with the cost.
+                            </ResponseField>
+                            <ResponseField name="cost" type="number">
+                                The cost amount.
+                            </ResponseField>
+                            <ResponseField name="currency" type="string">
+                                The currency associated with the cost (I.e. `USD`).
+                            </ResponseField>
+                        </Expandable>
                     </ResponseField>
-                    <ResponseField name="cost" type="number">
-                        The cost amount.
-                    </ResponseField>
-                    <ResponseField name="currency" type="string">
-                        The currency associated with the cost (I.e. `USD`).
-                    </ResponseField>
-                </ResponseField>
 
-                <ResponseField name="day_cost" type="object">
-                    Overall cost associated with any extras selected on a day level for the traveller.
-                    <ResponseField name="name" type="string">
-                        A name associated with the cost.
+                    <ResponseField name="day_cost" type="object">
+                        Overall cost associated with any extras selected on a day level for the traveller.
+                        <Expandable name="properties" defaultOpen={true}>
+                            <ResponseField name="name" type="string">
+                                A name associated with the cost.
+                            </ResponseField>
+                            <ResponseField name="cost" type="number">
+                                The cost amount.
+                            </ResponseField>
+                            <ResponseField name="currency" type="string">
+                                The currency associated with the cost (I.e. `USD`).
+                            </ResponseField>
+                            </Expandable>
                     </ResponseField>
-                    <ResponseField name="cost" type="number">
-                        The cost amount.
-                    </ResponseField>
-                    <ResponseField name="currency" type="string">
-                        The currency associated with the cost (I.e. `USD`).
-                    </ResponseField>
-                </ResponseField>
-
+                </Expandable>
             </ResponseField>
 
             <ResponseField name="trip_cost" type="object">
                 Overall cost associated with the trip (not on an individual traveller level).
-                <ResponseField name="name" type="string">
-                    A name associated with the cost.
-                </ResponseField>
-                <ResponseField name="cost" type="number">
-                    The cost amount.
-                </ResponseField>
-                <ResponseField name="currency" type="string">
-                    The currency associated with the cost (I.e. `USD`).
-                </ResponseField>
+                <Expandable name="properties" defaultOpen={true}>
+                    <ResponseField name="name" type="string">
+                        A name associated with the cost.
+                    </ResponseField>
+                    <ResponseField name="cost" type="number">
+                        The cost amount.
+                    </ResponseField>
+                    <ResponseField name="currency" type="string">
+                        The currency associated with the cost (I.e. `USD`).
+                    </ResponseField>
+                </Expandable>
             </ResponseField>
 
             <ResponseField name="extra_cost" type="object">
                 Overall cost associated with the extras selected for the trip (not on an individual traveller level).
-                <ResponseField name="name" type="string">
-                    A name associated with the cost.
-                </ResponseField>
-                <ResponseField name="cost" type="number">
-                    The cost amount.
-                </ResponseField>
-                <ResponseField name="currency" type="string">
-                    The currency associated with the cost (I.e. `USD`).
-                </ResponseField>
+                <Expandable name="properties" defaultOpen={true}>
+                    <ResponseField name="name" type="string">
+                        A name associated with the cost.
+                    </ResponseField>
+                    <ResponseField name="cost" type="number">
+                        The cost amount.
+                    </ResponseField>
+                    <ResponseField name="currency" type="string">
+                        The currency associated with the cost (I.e. `USD`).
+                    </ResponseField>
+                </Expandable>
             </ResponseField>
 
             <ResponseField name="day_cost" type="object">
                 Overall cost associated with any extras selected on a day level (not on an individual traveller level).
-                <ResponseField name="name" type="string">
-                    A name associated with the cost.
-                </ResponseField>
-                <ResponseField name="cost" type="number">
-                    The cost amount.
-                </ResponseField>
-                <ResponseField name="currency" type="string">
-                    The currency associated with the cost (I.e. `USD`).
-                </ResponseField>
+                <Expandable name="properties" defaultOpen={true}>
+                    <ResponseField name="name" type="string">
+                        A name associated with the cost.
+                    </ResponseField>
+                    <ResponseField name="cost" type="number">
+                        The cost amount.
+                    </ResponseField>
+                    <ResponseField name="currency" type="string">
+                        The currency associated with the cost (I.e. `USD`).
+                    </ResponseField>
+                </Expandable>
             </ResponseField>
         
         </Expandable>
     </ResponseField>
+
 </ResponseField>
 
 <ResponseExample>
