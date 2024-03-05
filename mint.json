@@ -47,7 +47,8 @@
     {
       "group": "Trips",
       "pages": [
-        "trips/get-all-trips"
+        "trips/get-all-trips",
+        "trips/get-all-short-trips"
       ]
     }
   ],
