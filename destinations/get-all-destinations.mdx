@@ -1,6 +1,6 @@
 ---
-title: 'Get Destination with IDs'
-api: 'POST https://api3.cloudsafaris.com/v1/get-destinations-with-ids'
+title: 'Get all Destinations'
+api: 'POST https://api3.cloudsafaris.com/v1/get-destinations'
 ---
 
 ### Header Parameters
@@ -16,6 +16,9 @@ api: 'POST https://api3.cloudsafaris.com/v1/get-destinations-with-ids'
 <ParamField body="offset" type="number" defaultValue={0}>
     The offset to start from to get the next set of destinations.
 </ParamField>
+<ParamField body="countries" type="string[]" defaultValue={0}>
+    Returns back destinations that are in a certain country. Possible values are `TZ` and `KE`.
+</ParamField>
 
 <RequestExample>
   ```json
@@ -28,7 +31,9 @@ api: 'POST https://api3.cloudsafaris.com/v1/get-destinations-with-ids'
 </RequestExample>
 
 ### Response Body Parameters
-
+<ResponseField name="offset" type="number">
+    The number corresponding with the offset. This value can be used to get the next set of destinations.
+</ResponseField>
 <ResponseField name="data" type="object[]">
 <Expandable name="properties" defaultOpen={true}>
     <ResponseField name="id" type="number">
@@ -141,6 +146,7 @@ api: 'POST https://api3.cloudsafaris.com/v1/get-destinations-with-ids'
 <ResponseExample>
 ```json
 {
+    "offset": 1,
     "data": [{
             "id": 141,
             "country": "Tanzania",
