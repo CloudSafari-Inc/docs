@@ -100,7 +100,7 @@
     {
       "group": "Payments",
       "pages": [
-        "pricing/get-pricing-for-trip"
+        "payments/sending-payments"
       ]
     }
   ],
