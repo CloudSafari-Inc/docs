@@ -3,26 +3,3 @@ title: 'Get Trip With ID'
 api: 'POST https://api3.cloudsafaris.com/v1/get-trip-with-id'
 ---
 
-### Header Parameters
-<ParamField header="CloudSafaris-API-Version" type="string" default="v1">
-  Currently the only acceptable value is `v1`.
-</ParamField>
-
-### Request Body Parameters
-<ParamField body="trip_id" type="number">
-    The unique identifier for the given trip.
-</ResponseField>
-
-
-<RequestExample>
-```json
-  {
-    "trip_id": 1
-  }
-```
-</RequestExample>
-
-### Response Body Parameters
-<ResponseField name="data" type="object">
-    This is the same data returned in the (/get-all-trips)[trips/get-all-trips#response-body-parameters] endpoint except this returns one trip instead of an array of trips.
-</ResponseField>
