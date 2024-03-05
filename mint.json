@@ -79,7 +79,8 @@
       "group": "Booking",
       "pages": [
         "booking/book-a-trip",
-        "booking/get-trip-status"
+        "booking/get-trip-status",
+        "booking/update-booking-status"
       ]
     }
   ],
