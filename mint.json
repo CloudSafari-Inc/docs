@@ -68,6 +68,12 @@
         "properties/get-property-by-id",
         "properties/get-all-properties-by-ids"
       ]
+    },
+    {
+      "group": "Pricing",
+      "pages": [
+        "pricing/get-pricing-for-trip"
+      ]
     }
   ],
   "api": {

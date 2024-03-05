@@ -1,0 +1,410 @@
+---
+title: 'Get Pricing for Trip'
+api: 'POST https://api3.cloudsafaris.com/v1/pricing/get-pricing-for-trip'
+---
+
+This endpoint will return the trip price. There are two sets of pricing that's returned via this endpoint.
+
+The first trip price returned is the Nett Rate and the second price possibly returned is the Rack Rate.
+
+#### Nett Rate
+The Nett Rate is the basic cost of the trip. This is the amount that you will require to send to us when a trip is ready to be booked.
+
+We've negotiated Nett rates with our suppliers to get you the best price for a trip. This will give you a competitive edge to markup and then sell a trip at your price.
+
+The Nett Rate includes a fee from CloudSafaris that's decided when CloudSafari, Inc. and your company enter into a contractual agreement together.
+
+#### Rack Rate
+The Rack Rate is the minimum rate you're required to sell a trip at. Our suppliers have base rates (rack rates) that they will sell to customers if a customer was to inquire directly with them. 
+
+Based on the contracts, you are legally obliged to sell at a minimum of this price so that you do not compete directly with the suppliers.
+
+<Info>
+If the Rack Rate is not returned, you are free to markup and sell a trip with no minimum amount. I.e. you would be allowed to sell a trip at the Nett rate.
+</Info>
+
+### Header Parameters
+<ParamField header="CloudSafaris-API-Version" type="string" default="v1">
+  Currently the only acceptable value is `v1`.
+</ParamField>
+
+### Request Body Parameters
+
+<ParamField body="trip_id" type="number" required>
+    The unique identifier for the trip.
+</ParamField>
+<ParamField body="trip_start_date" type="string" required>
+    The start date for the trip (ISO formatted) as selected by the traveller.
+</ParamField>
+<ParamField body="extra_costs" type="object" required>
+    <Expandable type="properties" defaultOpen={true}>
+        <ParamField body="trip_extras" type="object[]" required>
+            <Expandable type="properties" defaultOpen={true}>
+                <ParamField body="extra_id" type="number">
+                    The unique identifier (id) for the extra.
+                </ParamField>
+                <ParamField body="units" type="number">
+                    The number of units to account for (more than 1 if multiple units are enabled).
+                </ParamField>
+            </Expandable>
+        </ParamField>
+
+        <ParamField body="day_extras" type="object[]" required>
+            <Expandable type="properties" defaultOpen={true}>
+                <ParamField body="day_id" type="number">
+                    The unique identifier (id) for the day.
+                </ParamField>
+                <ParamField body="extra_id" type="number">
+                    The unique identifier (id) for the extra.
+                </ParamField>
+                <ParamField body="units" type="number">
+                    The number of units to account for (more than 1 if multiple units are enabled).
+                </ParamField>
+            </Expandable>
+        </ParamField>
+
+    </Expandable>
+</ParamField>
+<ParamField body="travellers" type="object" required>
+    A minimum of 1 traveller is required.
+    <Expandable type="properties" defaultOpen={true}>
+        <ParamField body="date_of_birth" type="string" required>
+            The date of birth for the traveller. If you are not requesting for a customers date of birth, please enter in a traveller with an age between 30 and 40.
+        </ParamField>
+        <ParamField body="citizenship" type="string" required>
+            The citizenship type for the customer. Possible values are as follows:
+            `Tanzanian`, `Kenyan`, `East African Citizen`, `Foreigner`.
+        </ParamField>
+        <ParamField body="uuid" type="string" required>
+            The unique identifier (uuid) for the traveller. Each uuid must be unique.
+        </ParamField>
+    </Expandable>
+</ParamField>
+
+<RequestExample>
+  ```json
+{
+  "trip_id": 123,
+  "trip_start_date": "2023-09-15T00:00:00.000Z",
+  "extra_costs": {
+    "trip_extras": [
+      {
+        "extra_id": 1,
+        "units": 2
+      }
+    ],
+    "day_extras": [
+      {
+        "day_id": 1,
+        "extra_id": 2,
+        "units": 1
+      }
+    ]
+  },
+  "travellers": [
+    {
+      "date_of_birth": "1990-01-01T00:00:00.000Z",
+      "citizenship": "Foreigner",
+      "uuid": "123e4567-e89b-12d3-a456-426614174000"
+    }
+  ]
+}
+```
+</RequestExample>
+
+
+### Response Body Parameters
+
+<ResponseField name="data" type="object">
+    <ResponseField name="nett_rate" type="object" required>
+        The Nett Rate is the cost required to pay CloudSafari, Inc. to operate this trip.
+
+        <Expandable name="properties" defaultOpen={true}>
+
+            <ResponseField name="travellers" type="object">
+                <ResponseField name="uuid" type="uuid">
+                    The uuid (unique identifier) for the traveller.
+                </ResponseField>
+
+                <ResponseField name="trip_cost" type="object">
+                    Overall cost associated with the trip for the traveller (excludes any extras for the travellers).
+                    <ResponseField name="name" type="string">
+                        A name associated with the cost.
+                    </ResponseField>
+                    <ResponseField name="cost" type="number">
+                        The cost amount.
+                    </ResponseField>
+                    <ResponseField name="currency" type="string">
+                        The currency associated with the cost (I.e. `USD`).
+                    </ResponseField>
+                </ResponseField>
+
+                <ResponseField name="extra_cost" type="object">
+                    Overall cost associated with the extras selected for the traveller.
+                    <ResponseField name="name" type="string">
+                        A name associated with the cost.
+                    </ResponseField>
+                    <ResponseField name="cost" type="number">
+                        The cost amount.
+                    </ResponseField>
+                    <ResponseField name="currency" type="string">
+                        The currency associated with the cost (I.e. `USD`).
+                    </ResponseField>
+                </ResponseField>
+
+                <ResponseField name="day_cost" type="object">
+                    Overall cost associated with any extras selected on a day level for the traveller.
+                    <ResponseField name="name" type="string">
+                        A name associated with the cost.
+                    </ResponseField>
+                    <ResponseField name="cost" type="number">
+                        The cost amount.
+                    </ResponseField>
+                    <ResponseField name="currency" type="string">
+                        The currency associated with the cost (I.e. `USD`).
+                    </ResponseField>
+                </ResponseField>
+
+            </ResponseField>
+
+            <ResponseField name="trip_cost" type="object">
+                Overall cost associated with the trip (not on an individual traveller level).
+                <ResponseField name="name" type="string">
+                    A name associated with the cost.
+                </ResponseField>
+                <ResponseField name="cost" type="number">
+                    The cost amount.
+                </ResponseField>
+                <ResponseField name="currency" type="string">
+                    The currency associated with the cost (I.e. `USD`).
+                </ResponseField>
+            </ResponseField>
+
+            <ResponseField name="extra_cost" type="object">
+                Overall cost associated with the extras selected for the trip (not on an individual traveller level).
+                <ResponseField name="name" type="string">
+                    A name associated with the cost.
+                </ResponseField>
+                <ResponseField name="cost" type="number">
+                    The cost amount.
+                </ResponseField>
+                <ResponseField name="currency" type="string">
+                    The currency associated with the cost (I.e. `USD`).
+                </ResponseField>
+            </ResponseField>
+
+            <ResponseField name="day_cost" type="object">
+                Overall cost associated with any extras selected on a day level (not on an individual traveller level).
+                <ResponseField name="name" type="string">
+                    A name associated with the cost.
+                </ResponseField>
+                <ResponseField name="cost" type="number">
+                    The cost amount.
+                </ResponseField>
+                <ResponseField name="currency" type="string">
+                    The currency associated with the cost (I.e. `USD`).
+                </ResponseField>
+            </ResponseField>
+        
+        </Expandable>
+    </ResponseField>
+
+    <ResponseField name="rack_rate" type="object">
+        The Rack Rate is the minimum rate you're allowed to advertise this trip at. If this field is not returned back, you're free to sell this trip at the Nett Rate provided.
+
+        <Expandable name="properties" defaultOpen={true}>
+
+            <ResponseField name="travellers" type="object">
+                <ResponseField name="uuid" type="uuid">
+                    The uuid (unique identifier) for the traveller.
+                </ResponseField>
+
+                <ResponseField name="trip_cost" type="object">
+                    Overall cost associated with the trip for the traveller (excludes any extras for the travellers).
+                    <ResponseField name="name" type="string">
+                        A name associated with the cost.
+                    </ResponseField>
+                    <ResponseField name="cost" type="number">
+                        The cost amount.
+                    </ResponseField>
+                    <ResponseField name="currency" type="string">
+                        The currency associated with the cost (I.e. `USD`).
+                    </ResponseField>
+                </ResponseField>
+
+                <ResponseField name="extra_cost" type="object">
+                    Overall cost associated with the extras selected for the traveller.
+                    <ResponseField name="name" type="string">
+                        A name associated with the cost.
+                    </ResponseField>
+                    <ResponseField name="cost" type="number">
+                        The cost amount.
+                    </ResponseField>
+                    <ResponseField name="currency" type="string">
+                        The currency associated with the cost (I.e. `USD`).
+                    </ResponseField>
+                </ResponseField>
+
+                <ResponseField name="day_cost" type="object">
+                    Overall cost associated with any extras selected on a day level for the traveller.
+                    <ResponseField name="name" type="string">
+                        A name associated with the cost.
+                    </ResponseField>
+                    <ResponseField name="cost" type="number">
+                        The cost amount.
+                    </ResponseField>
+                    <ResponseField name="currency" type="string">
+                        The currency associated with the cost (I.e. `USD`).
+                    </ResponseField>
+                </ResponseField>
+
+            </ResponseField>
+
+            <ResponseField name="trip_cost" type="object">
+                Overall cost associated with the trip (not on an individual traveller level).
+                <ResponseField name="name" type="string">
+                    A name associated with the cost.
+                </ResponseField>
+                <ResponseField name="cost" type="number">
+                    The cost amount.
+                </ResponseField>
+                <ResponseField name="currency" type="string">
+                    The currency associated with the cost (I.e. `USD`).
+                </ResponseField>
+            </ResponseField>
+
+            <ResponseField name="extra_cost" type="object">
+                Overall cost associated with the extras selected for the trip (not on an individual traveller level).
+                <ResponseField name="name" type="string">
+                    A name associated with the cost.
+                </ResponseField>
+                <ResponseField name="cost" type="number">
+                    The cost amount.
+                </ResponseField>
+                <ResponseField name="currency" type="string">
+                    The currency associated with the cost (I.e. `USD`).
+                </ResponseField>
+            </ResponseField>
+
+            <ResponseField name="day_cost" type="object">
+                Overall cost associated with any extras selected on a day level (not on an individual traveller level).
+                <ResponseField name="name" type="string">
+                    A name associated with the cost.
+                </ResponseField>
+                <ResponseField name="cost" type="number">
+                    The cost amount.
+                </ResponseField>
+                <ResponseField name="currency" type="string">
+                    The currency associated with the cost (I.e. `USD`).
+                </ResponseField>
+            </ResponseField>
+        
+        </Expandable>
+    </ResponseField>
+</ResponseField>
+
+<ResponseExample>
+```json
+{
+  "nett_rate": {
+    "travellers": [
+      {
+        "uuid": "123e4567-e89b-12d3-a456-426614174000",
+        "trip_cost": [
+          {
+            "name": "Basic Safari",
+            "cost": 1200,
+            "currency": "USD"
+          }
+        ],
+        "extra_costs": [
+          {
+            "name": "Hot Air Balloon Ride",
+            "cost": 300,
+            "currency": "USD"
+          }
+        ],
+        "day_costs": [
+          {
+            "name": "Day Trip to Ngorongoro",
+            "cost": 200,
+            "currency": "USD"
+          }
+        ]
+      }
+    ],
+    "trip_cost": [
+      {
+        "name": "Total Trip Cost",
+        "cost": 1200,
+        "currency": "USD"
+      }
+    ],
+    "extra_cost": [
+      {
+        "name": "Total Extra Activities",
+        "cost": 300,
+        "currency": "USD"
+      }
+    ],
+    "day_cost": [
+      {
+        "name": "Total Day Costs",
+        "cost": 200,
+        "currency": "USD"
+      }
+    ]
+  },
+  "rack_rate": {
+    "travellers": [
+      {
+        "uuid": "123e4567-e89b-12d3-a456-426614174000",
+        "trip_cost": [
+          {
+            "name": "Basic Safari Retail",
+            "cost": 1440,
+            "currency": "USD"
+          }
+        ],
+        "extra_costs": [
+          {
+            "name": "Hot Air Balloon Ride Retail",
+            "cost": 360,
+            "currency": "USD"
+          }
+        ],
+        "day_costs": [
+          {
+            "name": "Day Trip to Ngorongoro Retail",
+            "cost": 240,
+            "currency": "USD"
+          }
+        ]
+      }
+    ],
+    "trip_cost": [
+      {
+        "name": "Total Trip Cost Retail",
+        "cost": 1440,
+        "currency": "USD"
+      }
+    ],
+    "extra_cost": [
+      {
+        "name": "Total Extra Activities Retail",
+        "cost": 360,
+        "currency": "USD"
+      }
+    ],
+    "day_cost": [
+      {
+        "name": "Total Day Costs Retail",
+        "cost": 240,
+        "currency": "USD"
+      }
+    ]
+  }
+}
+
+```
+</ResponseExample>
