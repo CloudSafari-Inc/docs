@@ -1,0 +1,116 @@
+---
+title: 'Get All Short Trips'
+api: 'GET https://api3.cloudsafaris.com/v1/get-all-short-trips'
+---
+
+### Header Parameters
+<ParamField header="CloudSafaris-API-Version" type="string" default="v1">
+  Currently the only acceptable value is `v1`.
+</ParamField>
+
+### Request Body Parameters
+
+<ParamField body="limit" type="number" default={200}>
+  The limit on the number of trips to return.
+</ParamField>
+
+<ParamField body="offset" type="number" default={0}>
+    If requesting another set of trips, this will apply the offset to the next set of trips.
+</ParamField>
+
+<ParamField body="country" type="string[]" default="none">
+    An array of string values of either `TZ` or `KE`, or both.
+</ParamField>
+
+<ParamField body="max_price" type="number" default="none">
+    The maximum price of the trips that are returned within a given calendar year.
+</ParamField>
+
+<ParamField body="required_guides" type="string[]" default="none">
+    Required guides for the trips, such as `SAFARI` or `KILIMANJARO`.
+</ParamField>
+
+<ParamField body="destinations" type="number[]" default="none">
+    The ids of the destinations to filter trips.
+</ParamField>
+
+<ParamField body="properties" type="number[]" default="none">
+    The ids of the properties to filter trips.
+</ParamField>
+
+<RequestExample>
+  ```json
+  {
+    "limit": 2,
+    "country": ["KE"],
+    "max_price": 1500,
+    "destinations": [3]
+  }
+```
+</RequestExample>
+
+### Response Body Parameters
+<ResponseField name="id" type="number">
+    Unique identifier for the trip.
+</ResponseField>
+<ResponseField name="title" type="string">
+    Title of the trip.
+</ResponseField>
+<ResponseField name="overview" type="string">
+    Brief overview of the trip.
+</ResponseField>
+<ResponseField name="suppliers" type="object[]">
+    <Expandable title="properties" defaultOpen={true}>
+        <ResponseField name="name" type="string">
+            Name of the supplier (local tour company).
+        </ResponseField>
+        <ResponseField name="image_url" type="string">
+            An image URL for the local supplier (local tour company).
+        </ResponseField>
+    </Expandable>
+</ResponseField>
+<ResponseField name="image_urls" type="string[]">
+    URLs of images related to the trip.
+</ResponseField>
+<ResponseField name="pricing" type="object">
+    <Expandable title="properties" defaultOpen={true}>
+        <ResponseField name="low" type="number">
+            The low price range for the trip based on 2 people going on a trip in low season.
+        </ResponseField>
+        <ResponseField name="high" type="number">
+            The high price range for the trip based on 2 people going on a trip in high/peak season.
+        </ResponseField>
+        <ResponseField name="currency" type="string">
+            The currency for the low and high values. I.e. `USD`.
+        </ResponseField>
+    </Expandable>
+</ResponseField>
+<ResponseField name="min_pax" type="number">
+    Minimum number of passengers required for the trip.
+</ResponseField>
+<ResponseField name="countries" type="string[]">
+    Countries available for the trip, possible values "TZ" and "KE".
+</ResponseField>
+<ResponseExample>
+```json
+{
+    "id": 101,
+    "title": "Quick Safari Getaway",
+    "overview": "A brief yet exhilarating safari experience in the Serengeti...",
+    "suppliers": [
+        {
+            "name": "Quick Safari Co.",
+            "image_url": "https://example.com/supplier_image.jpg"
+        }
+    ],
+    "image_urls": [
+        "https://cloudsafaris.com/path/to/short_trip_image1.jpg",
+        "https://cloudsafaris.com/path/to/short_trip_image2.jpg"
+    ],
+    "base_price": 950,
+    "min_pax": 2,
+    "countries": ["TZ"]
+}
+```
+</ResponseExample>
+```
