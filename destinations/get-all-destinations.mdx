@@ -26,6 +26,7 @@ api: 'POST https://api3.cloudsafaris.com/v1/get-destinations'
     "limit": 1,
     "offset": 0,
     "countries": ["TZ"],
+    "type": ["National Park", "Wildlife Conservancy", "International Airport"]
   }
 ```
 </RequestExample>
@@ -146,8 +147,8 @@ api: 'POST https://api3.cloudsafaris.com/v1/get-destinations'
 <ResponseExample>
 ```json
 {
-    "offset": 1,
-    "data": [{
+    "length": 1,
+    "destinations": [{
             "id": 141,
             "country": "Tanzania",
             "name": "Serengeti National Park",
@@ -166,26 +167,26 @@ api: 'POST https://api3.cloudsafaris.com/v1/get-destinations'
             "destination_type": "National Park",
             "faq": [
                 {
-                "question": "What is the best time to visit Serengeti National Park?",
-                "answer": "The best time to visit is from June to October for the wildebeest migration."
+                    "question": "What is the best time to visit Serengeti National Park?",
+                    "answer": "The best time to visit is from June to October for the wildebeest migration."
                 }
             ],
             "extra_details": [
                 {
-                "type": "Getting There",
-                "title": "Accessing Serengeti National Park",
-                "description": "Information on how to get to Serengeti National Park by air and land.",
-                "url": "url_to_more_information.com"
+                    "type": "Getting There",
+                    "title": "Accessing Serengeti National Park",
+                    "description": "Information on how to get to Serengeti National Park by air and land.",
+                    "url": "url_to_more_information.com"
                 }
             ],
             "wildlife": [
                 {
-                "name": "Lion",
-                "description": "Detailed description of lions in Serengeti, including their behavior and best places to see them.",
-                "images": [
-                    "url_to_lion_image.jpg"
-                ],
-                "rarity": "Common"
+                    "name": "Lion",
+                    "description": "Detailed description of lions in Serengeti, including their behavior and best places to see them.",
+                    "images": [
+                        "url_to_lion_image.jpg"
+                    ],
+                    "rarity": "Common"
                 }
             ]
     }]

@@ -44,7 +44,13 @@ api: 'POST https://api3.cloudsafaris.com/v1/trips/get-all-short-trips'
     "limit": 2,
     "country": ["KE"],
     "max_price": 1500,
-    "destinations": [3]
+    "min_price": 1000, 
+    "required_guides": ["SAFARI"], 
+    "destinations": [3], 
+    "properties": [1, 2], 
+    "date": "2024-10-05T14:48:00.000Z", 
+    "days": 7, 
+    "number_of_travellers": 2
   }
 ```
 </RequestExample>
@@ -98,19 +104,32 @@ api: 'POST https://api3.cloudsafaris.com/v1/trips/get-all-short-trips'
     "id": 101,
     "title": "Quick Safari Getaway",
     "overview": "A brief yet exhilarating safari experience in the Serengeti...",
+    "countries": ["TZ"],
+    "pricing": {
+        "low": 1250, 
+        "high": 1750, 
+        "currency": "USD"
+    },
+    "properties": [{
+        "id": 1,
+        "name": "Serengeti Kati Kati Camp"
+    }],
     "suppliers": [
-        {
-            "name": "Quick Safari Co.",
-            "image_url": "https://example.com/supplier_image.jpg"
-        }
-    ],
-    "image_urls": [
-        "https://cloudsafaris.com/path/to/short_trip_image1.jpg",
-        "https://cloudsafaris.com/path/to/short_trip_image2.jpg"
-    ],
-    "base_price": 950,
+    {
+        "name": "Quick Safari Co.",
+        "image_url": "https://example.com/supplier_image.jpg"
+    }],
     "min_pax": 2,
-    "countries": ["TZ"]
+    "image_urls": [
+        "short_trip_image1.jpg",
+        "short_trip_image2.jpg"
+    ],
+    "destinations": [{
+        "id": 1,
+        "name": "Serengeti National Park"
+    }],
+    "days": 7, 
+    "url": "/quick-safari-getaway"
 }
 ```
 </ResponseExample>

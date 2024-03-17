@@ -17,7 +17,7 @@ api: 'POST https://api3.cloudsafaris.com/v1/properties/get-property-by-id'
 <RequestExample>
   ```json
   {
-    "id": 4
+    "property_id": 4
   }
 ```
 </RequestExample>
@@ -80,30 +80,29 @@ api: 'POST https://api3.cloudsafaris.com/v1/properties/get-property-by-id'
 <ResponseExample>
 ```json
 {
-    "data": {
-        "name": "Namiri Plains Camp",
-        "latitude": -2.3333,
-        "longitude": 34.8333,
-        "social_links": ["https://facebook.com/exampleNamiriPlains", "https://instagram.com/exampleNamiriPlains"],
-        "note": "Namiri Plains Camp is known for its exceptional wildlife sightings and luxurious accommodations.",
-        "images": ["https://example.com/image1.jpg", "https://example.com/image2.jpg"],
-        "property_url": "https://asilia.com/namiri-plains-camp",
-        "amenities": [
-            {
-            "name": "Spa",
-            "description": "A full-service spa offering a variety of treatments.",
-            "icon_url": "https://example.com/icons/spa.png"
-            }
-        ],
-        "highlights": ["Exclusive wildlife viewing", "Luxury tented suites", "Guided safari walks"],
-        "getting_there": [
-            {
-            "type": "Flight",
-            "description": "Direct flights available from major cities to the nearest airstrip, followed by a short drive."
-            }
-        ],
-        "room_description": "Spacious tented suites with private views, en-suite bathrooms, and elegant decor."
-    }
+    "name": "Namiri Plains Camp",
+    "latitude": -2.3333,
+    "longitude": 34.8333,
+    "social_links": ["https://facebook.com/exampleNamiriPlains", "https://instagram.com/exampleNamiriPlains"],
+    "note": "Namiri Plains Camp is known for its exceptional wildlife sightings and luxurious accommodations.",
+    "images": ["https://example.com/image1.jpg", "https://example.com/image2.jpg"],
+    "property_url": "https://asilia.com/namiri-plains-camp",
+    "amenities": [
+        {
+        "name": "Spa",
+        "description": "A full-service spa offering a variety of treatments.",
+        "icon_url": "https://example.com/icons/spa.png"
+        }
+    ],
+    "highlights": ["Exclusive wildlife viewing", "Luxury tented suites", "Guided safari walks"],
+    "getting_there": [
+        {
+        "type": "Flight",
+        "description": "Direct flights available from major cities to the nearest airstrip, followed by a short drive."
+        }
+    ],
+    "room_description": "Spacious tented suites with private views, en-suite bathrooms, and elegant decor.", 
+    "property_url": "/namiri-plains-camp"
 }
 ```
 </ResponseExample>

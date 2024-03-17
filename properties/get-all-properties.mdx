@@ -25,7 +25,10 @@ api: 'POST https://api3.cloudsafaris.com/v1/properties/get-properties'
   {
     "limit": 1,
     "offset": 0,
-    "countries": ["TZ"],
+    "destinations": [1, 2, 3],
+    "luxury_level": 1,
+    "types": ["Lodge", "Mobile Camp", "Hotel"], 
+    "Amenities": ["Hair Dryer", "Wifi", "Lounge & Bar"], 
   }
 ```
 </RequestExample>
@@ -87,8 +90,8 @@ api: 'POST https://api3.cloudsafaris.com/v1/properties/get-properties'
 
 <ResponseExample>
 ```json
-{
-    "data": [{
+[
+    {
         "name": "Namiri Plains Camp",
         "latitude": -2.3333,
         "longitude": 34.8333,
@@ -110,8 +113,9 @@ api: 'POST https://api3.cloudsafaris.com/v1/properties/get-properties'
             "description": "Direct flights available from major cities to the nearest airstrip, followed by a short drive."
             }
         ],
-        "room_description": "Spacious tented suites with private views, en-suite bathrooms, and elegant decor."
-    }]
-}
+        "room_description": "Spacious tented suites with private views, en-suite bathrooms, and elegant decor.", 
+        "property_url": "/namiri-plains-camp"
+    }
+]
 ```
 </ResponseExample>

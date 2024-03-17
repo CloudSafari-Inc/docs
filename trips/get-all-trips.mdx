@@ -44,12 +44,18 @@ api: 'POST https://api3.cloudsafaris.com/v1/trips/get-all-trips'
 
 <RequestExample>
   ```json
-  {
-    "limit": 1,
-    "country": ["TZ"],
-    "max_price": 3000,
-    "destinations": [2]
-  }
+{
+    "limit": 2,
+    "country": ["KE"],
+    "max_price": 1500,
+    "min_price": 1000, 
+    "required_guides": ["SAFARI"], 
+    "destinations": [3], 
+    "properties": [1, 2], 
+    "date": "2024-10-05T14:48:00.000Z", 
+    "days": 7, 
+    "number_of_travellers": 2
+}
   ```
 </RequestExample>
 
@@ -245,16 +251,17 @@ api: 'POST https://api3.cloudsafaris.com/v1/trips/get-all-trips'
 <ResponseExample>
 ```json
 { 
-    "offset": "2",
-    "data": [
+    "total_length": 25,
+    "filtered_length": 1, 
+    "trips": [
         {
             "id": 11,
             "name": "5 Day Tanzanian Safari, Savannah Tours",
             "trip_overview": "A comprehensive 5-day safari experience starting from Arusha to Tarangire National Park with game drives and accommodations at Burunge Tented Lodge, among other destinations.",
             "pricing": {
-            "low": 1200,
-            "high": 2500,
-            "currency": "USD"
+                "low": 1200,
+                "high": 2500,
+                "currency": "USD"
             },
             "included": ["4x4 Private safari vehicle", "Professional guide", "Park Fees", "Accommodations"],
             "excluded": ["Driver / guide tips", "Airport transfers", "Anything not explicitly included"],
@@ -266,8 +273,8 @@ api: 'POST https://api3.cloudsafaris.com/v1/trips/get-all-trips'
             }
             ],
             "image_urls": [
-            "https://cloudsafaris.com/path/to/image1.jpg",
-            "https://cloudsafaris.com/path/to/image2.jpg"
+                "https://cloudsafaris.com/path/to/image1.jpg",
+                "https://cloudsafaris.com/path/to/image2.jpg"
             ],
             "file_urls": [],
             "trip_extras": [
@@ -319,7 +326,8 @@ api: 'POST https://api3.cloudsafaris.com/v1/trips/get-all-trips'
                 ]
             }
             // Additional days follow a similar structure
-            ]
+            ],
+            "countries": ["TZ"]
         }
     ]
 }

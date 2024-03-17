@@ -17,7 +17,7 @@ api: 'POST https://api3.cloudsafaris.com/v1/properties/get-properties-by-ids'
 <RequestExample>
   ```json
   {
-    "ids": [1,5,20]
+    "property_ids": [1,5,20]
   }
 ```
 </RequestExample>
@@ -80,10 +80,9 @@ api: 'POST https://api3.cloudsafaris.com/v1/properties/get-properties-by-ids'
 </ResponseField>
 
 <ResponseExample>
-```json
-{
-    "offset": 1,
-    "data": [{
+```json 
+[
+    {
         "name": "Namiri Plains Camp",
         "latitude": -2.3333,
         "longitude": 34.8333,
@@ -105,8 +104,9 @@ api: 'POST https://api3.cloudsafaris.com/v1/properties/get-properties-by-ids'
             "description": "Direct flights available from major cities to the nearest airstrip, followed by a short drive."
             }
         ],
-        "room_description": "Spacious tented suites with private views, en-suite bathrooms, and elegant decor."
-    }]
-}
+        "room_description": "Spacious tented suites with private views, en-suite bathrooms, and elegant decor.", 
+        "property_url": "/namiri-plains-camp"
+    }   
+]
 ```
 </ResponseExample>
