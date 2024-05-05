@@ -50,7 +50,8 @@
         "trips/get-all-trips",
         "trips/get-all-short-trips",
         "trips/get-trip-with-id",
-        "trips/get-trips-with-ids"
+        "trips/get-trips-with-ids",
+        "trips/get-short-trips-with-ids"
       ]
     },
     {
@@ -58,7 +59,9 @@
       "pages": [
         "destinations/get-all-destinations",
         "destinations/get-destination-by-id",
-        "destinations/get-destinations-by-ids"
+        "destinations/get-destinations-with-ids", 
+        "destinations/get-destination-by-url", 
+        "destinations/get-destination-id-by-url"
       ]
     },
     {
@@ -72,7 +75,8 @@
     {
       "group": "Pricing",
       "pages": [
-        "pricing/get-pricing-for-trip"
+        "pricing/get-pricing-for-trip", 
+        "pricing/get-public-pricing-for-trip"
       ]
     },
     {
@@ -86,9 +90,13 @@
       "group": "Webhooks",
       "pages": [
         "webhooks/update-booking-status",
-        "webhooks/trip-message-updates"
+        "webhooks/trip-message-updates",
+        "webhooks/create-webhook", 
+        "webhooks/get-webhooks",
+        "webhooks/delete-webhook"
       ]
     },
+    
     {
       "group": "Manage Trip",
       "pages": [

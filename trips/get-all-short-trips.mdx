@@ -10,7 +10,7 @@ api: 'POST https://api3.cloudsafaris.com/v1/trips/get-all-short-trips'
 
 ### Request Body Parameters
 
-<ParamField body="limit" type="number" default={200}>
+<ParamField body="limit" type="number">
   The limit on the number of trips to return.
 </ParamField>
 
@@ -18,24 +18,43 @@ api: 'POST https://api3.cloudsafaris.com/v1/trips/get-all-short-trips'
     If requesting another set of trips, this will apply the offset to the next set of trips.
 </ParamField>
 
-<ParamField body="country" type="string[]" default="none">
+<ParamField body="countries" type="string[]" default={[]}>
     An array of string values of either `TZ` or `KE`, or both.
 </ParamField>
 
-<ParamField body="max_price" type="number" default="none">
-    The maximum price of the trips that are returned within a given calendar year.
+<ParamField body="max_price" type="number" default={10000}>
+    The maximum price of the trips that are returned within a given calendar year. 
+    For example if you set this as `3000` only packages that have a max price under `3000` will be returned.
 </ParamField>
 
-<ParamField body="required_guides" type="string[]" default="none">
-    Required guides for the trips, such as `SAFARI` or `KILIMANJARO`.
+<ParamField body="min_price" type="number" default={0}>
+    The minimum price of the trips that are returned within a given calendar year. 
+    For example if you set this as `3000` only packages that have a min price over `3000` will be returned.
 </ParamField>
 
-<ParamField body="destinations" type="number[]" default="none">
-    The ids of the destinations to filter trips.
+<ParamField body="required_guides" type="string[]" default={[]}>
+    An array of string values of either `SAFARI` or `KILIMANJARO`, or both. This will return trips that are associated with the required guide tags that are passed.
+    For example, passing in `["KILIMANJARO"]` will only return trips that require a guide for Kilimanjaro.
 </ParamField>
 
-<ParamField body="properties" type="number[]" default="none">
-    The ids of the properties to filter trips.
+<ParamField body="destinations" type="number[]" default={[]}>
+    The ids of the destinations. If supplied this will only return trips that contain at least one of the given destination ids.
+</ParamField>
+
+<ParamField body="properties" type="number[]" default={[]}>
+    The ids of the properties. If supplied this will only return trips that contain at least one of the given properties.
+</ParamField>
+
+<ParamField body="date" type="date" required>
+  The desired start date of the trip
+</ParamField>
+
+<ParamField body="days" type="number">
+  The desired maximum length of the trip
+</ParamField>
+
+<ParamField body="number_of_travellers" type="number" default={2}>
+  The number of travellers on the trip
 </ParamField>
 
 <RequestExample>
@@ -56,80 +75,144 @@ api: 'POST https://api3.cloudsafaris.com/v1/trips/get-all-short-trips'
 </RequestExample>
 
 ### Response Body Parameters
-<ResponseField name="id" type="number">
-    Unique identifier for the trip.
+<ResponseField name="total_length" type="number">
+    The total number of trips in our database
 </ResponseField>
-<ResponseField name="title" type="string">
-    Title of the trip.
+<ResponseField name="filtered_length" type="number">
+    The number of trips returned after any filters or length limits are applied
 </ResponseField>
-<ResponseField name="overview" type="string">
-    Brief overview of the trip.
+<ResponseField name="trips" type="Trip Object Array">
+  <Expandable title="trips" defaultOpen={true}>
+    <ResponseField name="id" type="number">
+        The trip id is the unique id of the trip returned.
+    </ResponseField>
+
+    <ResponseField name="title" type="string">
+        The name of the the trip.
+    </ResponseField>
+
+    <ResponseField name="overview" type="string">
+        The overview of the trip (overall description).
+    </ResponseField>
+
+    <ResponseField name="pricing" type="object">
+        <Expandable title="pricing" defaultOpen={true}>
+            <ResponseField name="price" type="number">
+                The price for the trip based on 2 people going on this trip
+            </ResponseField>
+            <ResponseField name="currency" type="string">
+                The currency for the price, such as, `USD`.
+            </ResponseField>
+        </Expandable>
+    </ResponseField>
+
+    <ResponseField name="minimum_travellers" type="number">
+        The minimum number of travellers required to book the trip.
+    </ResponseField>
+
+    <ResponseField name="suppliers" type="object[]">
+        <Expandable title="properties" defaultOpen={true}>
+            <ResponseField name="name" type="string">
+                The name of the supplier (local tour company) to fulfill the trip.
+            </ResponseField>
+            <ResponseField name="logo_url" type="string">
+                The URL for the logo of the supplier (local tour company).
+            </ResponseField>
+        </Expandable>
+    </ResponseField>
+
+    <ResponseField name="image_urls" type="string[]">
+        The URLs of the images that can be used for this trip.
+    </ResponseField>
+    
+    <ResponseField name="properties" type="object[]">
+        <Expandable title="properties" defaultOpen={true}>
+            <ResponseField name="id" type="number">
+                The id of the property
+            </ResponseField>
+            <ResponseField name="name" type="string">
+                The name of the property
+            </ResponseField>
+        </Expandable>
+    </ResponseField>
+
+    <ResponseField name="destinations" type="object[]">
+        <Expandable title="properties" defaultOpen={true}>
+            <ResponseField name="id" type="number">
+                The id of the destination
+            </ResponseField>
+            <ResponseField name="name" type="string">
+                The name of the destination
+            </ResponseField>
+        </Expandable>
+    </ResponseField>
+
+    <ResponseField name="days" type="number">
+        The length of the trip
+    </ResponseField>
+
+    <ResponseField name="url" type="string">
+        The url path we use to access the full trip page
+    </ResponseField>
+  
+  </Expandable>
 </ResponseField>
-<ResponseField name="suppliers" type="object[]">
-    <Expandable title="properties" defaultOpen={true}>
-        <ResponseField name="name" type="string">
-            Name of the supplier (local tour company).
-        </ResponseField>
-        <ResponseField name="image_url" type="string">
-            An image URL for the local supplier (local tour company).
-        </ResponseField>
-    </Expandable>
-</ResponseField>
-<ResponseField name="image_urls" type="string[]">
-    URLs of images related to the trip.
-</ResponseField>
-<ResponseField name="pricing" type="object">
-    <Expandable title="properties" defaultOpen={true}>
-        <ResponseField name="low" type="number">
-            The low price range for the trip based on 2 people going on a trip in low season.
-        </ResponseField>
-        <ResponseField name="high" type="number">
-            The high price range for the trip based on 2 people going on a trip in high/peak season.
-        </ResponseField>
-        <ResponseField name="currency" type="string">
-            The currency for the low and high values. I.e. `USD`.
-        </ResponseField>
-    </Expandable>
-</ResponseField>
-<ResponseField name="min_pax" type="number">
-    Minimum number of passengers required for the trip.
-</ResponseField>
-<ResponseField name="countries" type="string[]">
-    Countries available for the trip, possible values "TZ" and "KE".
-</ResponseField>
+
 
 <ResponseExample>
 ```json
-{
-    "id": 101,
-    "title": "Quick Safari Getaway",
-    "overview": "A brief yet exhilarating safari experience in the Serengeti...",
-    "countries": ["TZ"],
-    "pricing": {
-        "low": 1250, 
-        "high": 1750, 
-        "currency": "USD"
-    },
-    "properties": [{
-        "id": 1,
-        "name": "Serengeti Kati Kati Camp"
-    }],
-    "suppliers": [
-    {
-        "name": "Quick Safari Co.",
-        "image_url": "https://example.com/supplier_image.jpg"
-    }],
-    "min_pax": 2,
-    "image_urls": [
-        "short_trip_image1.jpg",
-        "short_trip_image2.jpg"
-    ],
-    "destinations": [{
-        "id": 1,
-        "name": "Serengeti National Park"
-    }],
-    "days": 7, 
-    "url": "/quick-safari-getaway"
+{ 
+    "total_length": 25,
+    "filtered_length": 1, 
+    "trips": [
+        {
+            "id": 11,
+            "title": "5 Day Tanzanian Safari, Savannah Tours",
+            "overview": "A comprehensive 5-day safari experience starting from Arusha to Tarangire National Park with game drives and accommodations at Burunge Tented Lodge, among other destinations.",
+            "countries": ["TZ"],
+            "pricing": {
+                "price": 1200,
+                "currency": "USD"
+            },
+            "properties": [
+                {
+                    "id": 5, 
+                    "name": "Burunge Tented Lodge - Tarangire"
+                }, 
+                {
+                    "id": 16, 
+                    "name": "Marera Valley Lodge"
+                }
+                // Additional properties
+            ]
+            "suppliers": [
+                {
+                    "name": "Savannah Tours",
+                    "logo_url": "https://example.com/logo_url.jpg"
+                }
+                // Additional suppliers
+            ],
+            "min_pax": 2, 
+            "image_urls": [
+                "https://cloudsafaris.com/path/to/image1.jpg",
+                "https://cloudsafaris.com/path/to/image2.jpg"
+            ],
+            "destinations": [
+                {
+                    "id": 7, 
+                    "name": "Tarangire National Park"
+                }, 
+                {
+                    "id": 12, 
+                    "name": "Lake Manyara National Park"
+                }
+                // Additional destinations
+            ]
+            "days": 5,
+            "url": "/5-day-tanzanian-safari-savannah-tours"
+        }
+        // Additional trips
+    ]
 }
 ```
 </ResponseExample>

@@ -11,7 +11,7 @@ api: 'POST https://api3.cloudsafaris.com/v1/trips/get-all-trips'
 
 ### Request Body Parameters
 
-<ParamField body="limit" type="number" default={20}>
+<ParamField body="limit" type="number">
   The limit on the number of trips to return.
 </ParamField>
 
@@ -19,34 +19,51 @@ api: 'POST https://api3.cloudsafaris.com/v1/trips/get-all-trips'
     If requesting another set of trips, this will apply the offset to the next set of trips.
 </ParamField>
 
-<ParamField body="country" type="string[]" default="none">
+<ParamField body="countries" type="string[]" default={[]}>
     An array of string values of either `TZ` or `KE`, or both.
 </ParamField>
 
-<ParamField body="max_price" type="number" default="none">
+<ParamField body="max_price" type="number" default={10000}>
     The maximum price of the trips that are returned within a given calendar year. 
     For example if you set this as `3000` only packages that have a max price under `3000` will be returned.
-    The max price is based on 2 people going on a trip in a high season, this is an estimate. The max price may end up being more.
 </ParamField>
 
-<ParamField body="required_guides" type="string[]" default="none">
+<ParamField body="min_price" type="number" default={0}>
+    The minimum price of the trips that are returned within a given calendar year. 
+    For example if you set this as `3000` only packages that have a min price over `3000` will be returned.
+</ParamField>
+
+<ParamField body="required_guides" type="string[]" default={[]}>
     An array of string values of either `SAFARI` or `KILIMANJARO`, or both. This will return trips that are associated with the required guide tags that are passed.
     For example, passing in `["KILIMANJARO"]` will only return trips that require a guide for Kilimanjaro.
 </ParamField>
 
-<ParamField body="destinations" type="number[]" default="none">
+<ParamField body="destinations" type="number[]" default={[]}>
     The ids of the destinations. If supplied this will only return trips that contain at least one of the given destination ids.
 </ParamField>
 
-<ParamField body="properties" type="number[]" default="none">
+<ParamField body="properties" type="number[]" default={[]}>
     The ids of the properties. If supplied this will only return trips that contain at least one of the given properties.
+</ParamField>
+
+<ParamField body="date" type="date" required>
+  The desired start date of the trip
+</ParamField>
+
+<ParamField body="days" type="number">
+  The desired maximum length of the trip
+</ParamField>
+
+<ParamField body="number_of_travellers" type="number" default={2}>
+  The number of travellers on the trip
 </ParamField>
 
 <RequestExample>
   ```json
 {
     "limit": 2,
-    "country": ["KE"],
+    "offset": 10,
+    "countries": ["KE"],
     "max_price": 1500,
     "min_price": 1000, 
     "required_guides": ["SAFARI"], 
@@ -61,10 +78,13 @@ api: 'POST https://api3.cloudsafaris.com/v1/trips/get-all-trips'
 
 
 ### Response Body Parameters
-<ResponseField name="offset" type="number">
-    The offset of the trips, if making a subsequent request to get more trips use the offset to get the next batch of trips.
+<ResponseField name="total_length" type="number">
+    The total number of trips in our database
 </ResponseField>
-<ResponseField name="data" type="Trip Object Array">
+<ResponseField name="filtered_length" type="number">
+    The number of trips returned after any filters or length limits are applied
+</ResponseField>
+<ResponseField name="trips" type="Trip Object Array">
   <Expandable title="properties" defaultOpen={true}>
 
     <ResponseField name="id" type="number">
@@ -241,8 +261,49 @@ api: 'POST https://api3.cloudsafaris.com/v1/trips/get-all-trips'
                     </ResponseField>
                 </Expandable>
             </ResponseField>
-
         </Expandable>
+        <ResponseField name="countries" type="string[]">     
+            An array of country enums where this trip takes place
+        </ResponseField>
+
+        <ResponseField name="pick_up_location" type="object[]">            
+            <Expandable defaultOpen={true}>
+                <ResponseField name="latitude" type="number">
+                    The latitude of the pickup location
+                </ResponseField>
+                <ResponseField name="longitude" type="number">
+                    The longitude of the pickup location
+                </ResponseField>
+                <ResponseField name="note" type="string">
+                    A note about the pickup, providing more detail about the location
+                </ResponseField>
+                <ResponseField name="radius" type="number">
+                    The radius outlining the bounds of possible area for pickup
+                </ResponseField>
+                <ResponseField name="location_max_time" type="string">
+                    The latest a traveller could be picked up from this location
+                </ResponseField>
+            </Expandable>
+        </ResponseField>
+        <ResponseField name="drop_off_location" type="object[]">            
+            <Expandable defaultOpen={true}>
+                <ResponseField name="latitude" type="number">
+                    The latitude of the drop-off location
+                </ResponseField>
+                <ResponseField name="longitude" type="number">
+                    The longitude of the drop-off location
+                </ResponseField>
+                <ResponseField name="note" type="string">
+                    A note about the drop-off, providing more detail about the location
+                </ResponseField>
+                <ResponseField name="radius" type="number">
+                    The radius outlining the bounds of possible area for drop-off
+                </ResponseField>
+                <ResponseField name="location_max_time" type="string">
+                    The latest a traveller could be dropped-off at this location
+                </ResponseField>
+            </Expandable>
+        </ResponseField>
     </ResponseField>
   </Expandable>
 </ResponseField>
@@ -259,8 +320,7 @@ api: 'POST https://api3.cloudsafaris.com/v1/trips/get-all-trips'
             "name": "5 Day Tanzanian Safari, Savannah Tours",
             "trip_overview": "A comprehensive 5-day safari experience starting from Arusha to Tarangire National Park with game drives and accommodations at Burunge Tented Lodge, among other destinations.",
             "pricing": {
-                "low": 1200,
-                "high": 2500,
+                "price": 1200,
                 "currency": "USD"
             },
             "included": ["4x4 Private safari vehicle", "Professional guide", "Park Fees", "Accommodations"],
@@ -321,13 +381,28 @@ api: 'POST https://api3.cloudsafaris.com/v1/trips/get-all-trips'
                     {
                         "initial_id": 0,
                         "final_id": 20,
-                        "transfer_type": "Vehicle"
+                        "transfer_type": "Vehicle", 
+                        "moment": "MORNING"
                     }
                 ]
             }
             // Additional days follow a similar structure
             ],
-            "countries": ["TZ"]
+            "countries": ["TZ"], 
+            "pick_up_location": {
+                latitude: -3.429406, 
+                longitude: 37.074461, 
+                note: "Kilimanjaro International Airport",
+                radius: 50,
+                location_max_time: "08:00:00",         
+            }, 
+            "drop_off_location": {
+                latitude: -3.429406, 
+                longitude: 37.074461, 
+                note: "Kilimanjaro International Airport",
+                radius: 50,
+                location_max_time: "08:00:00",         
+            }
         }
     ]
 }

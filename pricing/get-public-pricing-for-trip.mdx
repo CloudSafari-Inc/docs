@@ -1,0 +1,127 @@
+---
+title: 'Get Public Pricing for Trip'
+api: 'POST https://api3.cloudsafaris.com/v1/pricing/get-pricing-for-trip'
+---
+
+<Info>
+This endpoint provides a streamlined version of the [Get Public Pricing for Trips](/pricing/get-pricing-for-trip) functionality, optimizing its suitability for parsing and public display.
+</Info>
+
+### Header Parameters
+<ParamField header="CloudSafaris-API-Version" type="string" default="v1">
+  Currently the only acceptable value is `v1`.
+</ParamField>
+
+### Request Body Parameters
+
+<ParamField body="trip_id" type="number" required>
+    The unique identifier for the trip.
+</ParamField>
+<ParamField body="trip_start_date" type="string" required>
+    The start date for the trip (ISO formatted) as selected by the traveller.
+</ParamField>
+<ParamField body="extra_costs" type="object" required>
+    <Expandable type="properties" defaultOpen={true}>
+        <ParamField body="trip_extras" type="object[]" required>
+            <Expandable type="properties" defaultOpen={true}>
+                <ParamField body="extra_id" type="number">
+                    The unique identifier (id) for the extra.
+                </ParamField>
+                <ParamField body="units" type="number">
+                    The number of units to account for (more than 1 if multiple units are enabled).
+                </ParamField>
+            </Expandable>
+        </ParamField>
+
+        <ParamField body="day_extras" type="object[]" required>
+            <Expandable type="properties" defaultOpen={true}>
+                <ParamField body="day_id" type="number">
+                    The unique identifier (id) for the day.
+                </ParamField>
+                <ParamField body="extra_id" type="number">
+                    The unique identifier (id) for the extra.
+                </ParamField>
+                <ParamField body="units" type="number">
+                    The number of units to account for (more than 1 if multiple units are enabled).
+                </ParamField>
+            </Expandable>
+        </ParamField>
+
+    </Expandable>
+</ParamField>
+<ParamField body="travellers" type="object" required>
+    A minimum of 1 traveller is required.
+    <Expandable type="properties" defaultOpen={true}>
+        <ParamField body="date_of_birth" type="string" required>
+            The date of birth for the traveller. If you are not requesting for a customers date of birth, please enter in a traveller with an age between 30 and 40.
+        </ParamField>
+        <ParamField body="citizenship" type="string" required>
+            The citizenship type for the customer. Possible values are as follows:
+            `Tanzanian`, `Kenyan`, `East African Citizen`, `Foreigner`.
+        </ParamField>
+        <ParamField body="uuid" type="string" required>
+            The unique identifier (uuid) for the traveller. Each uuid must be unique.
+        </ParamField>
+    </Expandable>
+</ParamField>
+
+<RequestExample>
+  ```json
+{
+  "trip_id": 123,
+  "trip_start_date": "2023-09-15T00:00:00.000Z",
+  "extra_costs": {
+    "trip_extras": [
+      {
+        "extra_id": 1,
+        "units": 2
+      }
+    ],
+    "day_extras": [
+      {
+        "day_id": 1,
+        "extra_id": 2,
+        "units": 1
+      }
+    ]
+  },
+  "travellers": [
+    {
+      "date_of_birth": "1990-01-01T00:00:00.000Z",
+      "citizenship": "Foreigner",
+      "uuid": "123e4567-e89b-12d3-a456-426614174000"
+    }
+  ]
+}
+```
+</RequestExample>
+
+
+### Response Body Parameters
+
+<ResponseField name="Name" type="string">
+    The name of the quoted price. i.e. "Final Quoted Price"
+</ResponseField>
+<ResponseField name="Cost" type="number">
+    The cost of the trip
+</ResponseField>
+<ResponseField name="Currency" type="string">
+    An enum string for the currency that the trip cost was quoted in
+</ResponseField>
+
+        
+          
+  
+         
+       
+
+<ResponseExample>
+```json
+{
+    "Name": ,
+    "Cost": 1500,
+    "Currency": "USD",
+}
+
+```
+</ResponseExample>

@@ -1,0 +1,59 @@
+---
+title: 'Create Webhook'
+api: 'POST https://api3.cloudsafaris.com/v1/webhooks/create-webhook'
+---
+
+<Info>
+This endpoint allows you to get all webhooks for your organization. 
+</Info>
+
+### Header Parameters
+<ParamField header="CloudSafaris-API-Version" type="string" default="v1">
+  Currently the only acceptable value is `v1`.
+</ParamField>
+
+### Request Body Parameters
+
+<ParamField body="platform_id" type="uuid" required>
+    The unique identifier for your platform, v4 UUID.
+</ParamField>
+<ParamField body="url" type="url" required>
+    The url that you would like us to send updates to. 
+</ParamField>
+<ParamField body="event_type" type="string" required>
+    An enum specifying the type of webhook you are creating. Options are: `["STATUS_UPDATE", "TRIP_MESSAGE"]`
+</ParamField>
+<ParamField body="is_active" type="boolean" default={true} required>
+    Specify whether this webhook is currently active or not.  
+</ParamField>
+
+
+<RequestExample>
+  ```json
+{
+    "platform_id": "00000000-0000-0000-0000-000000000000",
+    "url": "https://yourendpointurl.com"
+    "event_type": "STATUS_UPDATE", 
+    "is_active": true
+}
+```
+</RequestExample>
+
+
+### Response Body Parameters
+
+<ResponseField name="success" type="boolean">
+    Success is an indicator for whether the webhook was successfully created or not. 
+</ResponseField>
+<ResponseField name="ID" type="number">
+    The unique identifier created in our database for your webhook 
+</ResponseField>
+
+<ResponseExample>
+```json
+{
+    "success": true, 
+    "id": 123
+}
+```
+</ResponseExample>

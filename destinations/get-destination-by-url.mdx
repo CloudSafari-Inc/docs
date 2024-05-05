@@ -1,6 +1,6 @@
 ---
-title: 'Get Destination by ID'
-api: 'POST https://api3.cloudsafaris.com/v1/destinations/get-destination-with-id'
+title: 'Get Destination by URL'
+api: 'POST https://api3.cloudsafaris.com/v1/destinations/get-destination-by-url'
 ---
 
 ### Header Parameters
@@ -10,14 +10,14 @@ api: 'POST https://api3.cloudsafaris.com/v1/destinations/get-destination-with-id
 
 ### Request Body Parameters
 
-<ParamField body="id" type="number" required>
-  The unique identifier for the destination.
+<ParamField body="url" type="string" required>
+  The url path assosciated with that destination.
 </ParamField>
 
 <RequestExample>
   ```json
   {
-    "id": 1
+    "url": "/serengeti-national-park"
   }
 ```
 </RequestExample>

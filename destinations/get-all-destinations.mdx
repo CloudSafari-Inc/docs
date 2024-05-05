@@ -1,6 +1,6 @@
 ---
 title: 'Get all Destinations'
-api: 'POST https://api3.cloudsafaris.com/v1/get-destinations'
+api: 'POST https://api3.cloudsafaris.com/v1/destinations/get-destinations'
 ---
 
 ### Header Parameters
@@ -19,6 +19,9 @@ api: 'POST https://api3.cloudsafaris.com/v1/get-destinations'
 <ParamField body="countries" type="string[]" defaultValue={0}>
     Returns back destinations that are in a certain country. Possible values are `TZ` and `KE`.
 </ParamField>
+<ParamField body="featured" type="boolean">
+    Featured destinations filters for 
+</ParamField>
 
 <RequestExample>
   ```json
@@ -26,7 +29,8 @@ api: 'POST https://api3.cloudsafaris.com/v1/get-destinations'
     "limit": 1,
     "offset": 0,
     "countries": ["TZ"],
-    "type": ["National Park", "Wildlife Conservancy", "International Airport"]
+    "type": ["National Park", "Wildlife Conservancy", "International Airport"], 
+    "featured": true
   }
 ```
 </RequestExample>
@@ -161,8 +165,8 @@ api: 'POST https://api3.cloudsafaris.com/v1/get-destinations'
             "latitude": -2.3328,
             "longitude": 34.5665,
             "images": [
-                "url_to_image1.jpg",
-                "url_to_image2.jpg"
+                "https://cloudsafaris.com/images/public/url_to_lion_image",
+                "https://cloudsafaris.com/images/public/url_to_leopard_image"
             ],
             "destination_type": "National Park",
             "faq": [
@@ -184,7 +188,7 @@ api: 'POST https://api3.cloudsafaris.com/v1/get-destinations'
                     "name": "Lion",
                     "description": "Detailed description of lions in Serengeti, including their behavior and best places to see them.",
                     "images": [
-                        "url_to_lion_image.jpg"
+                        "https://cloudsafaris.com/images/public/url_to_lion_image"
                     ],
                     "rarity": "Common"
                 }

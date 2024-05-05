@@ -1,0 +1,43 @@
+---
+title: 'Delete Webhook'
+api: 'POST https://api3.cloudsafaris.com/v1/webhooks/delete-webhook'
+---
+
+### Header Parameters
+<ParamField header="CloudSafaris-API-Version" type="string" default="v1">
+  Currently the only acceptable value is `v1`.
+</ParamField>
+
+### Request Body Parameters
+
+<ParamField body="webhook_id" type="number" required>
+    The unique identifier for the webhook that you want to delete.
+</ParamField>
+
+
+<RequestExample>
+  ```json
+{
+    "webhook_id": 123
+}
+```
+</RequestExample>
+
+
+### Response Body Parameters
+
+<ResponseField name="success" type="boolean">
+    Success is an indicator for whether the webhook was successfully deleted or not. 
+</ResponseField>
+<ResponseField name="ID" type="number">
+    The unique identifier of the webhook deleted 
+</ResponseField>
+
+<ResponseExample>
+```json
+{
+    "success": true, 
+    "id": 123
+}
+```
+</ResponseExample>

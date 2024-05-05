@@ -1,6 +1,6 @@
 ---
-title: 'Get Destination by ID'
-api: 'POST https://api3.cloudsafaris.com/v1/destinations/get-destination-with-id'
+title: 'Get Destination with Ids'
+api: 'POST https://api3.cloudsafaris.com/v1/get-destinations-with-ids'
 ---
 
 ### Header Parameters
@@ -10,14 +10,14 @@ api: 'POST https://api3.cloudsafaris.com/v1/destinations/get-destination-with-id
 
 ### Request Body Parameters
 
-<ParamField body="id" type="number" required>
-  The unique identifier for the destination.
+<ParamField body="ids" type="number[]" required>
+  An array of numbers which corresponds to the unique identifiers (ids) of the destinations.
 </ParamField>
 
 <RequestExample>
   ```json
   {
-    "id": 1
+    "ids": [1,5,20]
   }
 ```
 </RequestExample>
@@ -130,47 +130,49 @@ api: 'POST https://api3.cloudsafaris.com/v1/destinations/get-destination-with-id
 
 <ResponseExample>
 ```json
-{
-    "id": 141,
-    "country": "Tanzania",
-    "name": "Serengeti National Park",
-    "description": "A detailed description of Serengeti National Park, covering its vast ecosystems and rich wildlife.",
-    "short_description": "Iconic national park known for its annual wildebeest migration.",
-    "geographic_size": 14750,
-    "altitude": 920,
-    "population": 0,
-    "best_time_to_visit": "June to October",
-    "latitude": -2.3328,
-    "longitude": 34.5665,
-    "images": [
-        "url_to_image1.jpg",
-        "url_to_image2.jpg"
-    ],
-    "destination_type": "National Park",
-    "faq": [
-        {
-            "question": "What is the best time to visit Serengeti National Park?",
-            "answer": "The best time to visit is from June to October for the wildebeest migration."
-        }
-    ],
-    "extra_details": [
-        {
-            "type": "Getting There",
-            "title": "Accessing Serengeti National Park",
-            "description": "Information on how to get to Serengeti National Park by air and land.",
-            "url": "url_to_more_information.com"
-        }
-    ],
-    "wildlife": [
-        {
+[
+    {
+        "id": 141,
+        "country": "Tanzania",
+        "name": "Serengeti National Park",
+        "description": "A detailed description of Serengeti National Park, covering its vast ecosystems and rich wildlife.",
+        "short_description": "Iconic national park known for its annual wildebeest migration.",
+        "geographic_size": 14750,
+        "altitude": 920,
+        "population": 0,
+        "best_time_to_visit": "June to October",
+        "latitude": -2.3328,
+        "longitude": 34.5665,
+        "images": [
+            "url_to_image1.jpg",
+            "url_to_image2.jpg"
+        ],
+        "destination_type": "National Park",
+        "faq": [
+            {
+                "question": "What is the best time to visit Serengeti National Park?",
+                "answer": "The best time to visit is from June to October for the wildebeest migration."
+            }
+        ],
+        "extra_details": [
+            {
+                "type": "Getting There",
+                "title": "Accessing Serengeti National Park",
+                "description": "Information on how to get to Serengeti National Park by air and land.",
+                "url": "url_to_more_information.com"
+            }
+        ],
+        "wildlife": [
+            {
             "name": "Lion",
             "description": "Detailed description of lions in Serengeti, including their behavior and best places to see them.",
             "images": [
                 "https://cloudsafaris.com/images/public/url_to_lion_image"
             ],
             "rarity": "Common"
-        }
-    ]
-}
+            }
+        ]
+    }
+]
 ```
 </ResponseExample>

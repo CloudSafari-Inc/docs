@@ -1,0 +1,37 @@
+---
+title: 'Get Destination by URL'
+api: 'POST https://api3.cloudsafaris.com/v1/destinations/get-destination-id-by-url'
+---
+
+### Header Parameters
+<ParamField header="CloudSafaris-API-Version" type="string" default="v1">
+  Currently the only acceptable value is `v1`.
+</ParamField>
+
+### Request Body Parameters
+
+<ParamField body="url" type="string" required>
+  The url path assosciated with that destination.
+</ParamField>
+
+<RequestExample>
+  ```json
+  {
+    "url": "/serengeti-national-park"
+  }
+```
+</RequestExample>
+
+### Response Body Parameters
+
+<ResponseField name="id" type="number">
+    The unique identified for the destination.
+</ResponseField>
+
+<ResponseExample>
+```json
+{
+    "id": 141
+}
+```
+</ResponseExample>
