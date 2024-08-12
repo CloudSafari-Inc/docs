@@ -80,29 +80,10 @@
       ]
     },
     {
-      "group": "Booking",
+      "group": "Quotes",
       "pages": [
-        "booking/book-a-trip",
-        "booking/get-trip-status"
-      ]
-    },
-    {
-      "group": "Webhooks",
-      "pages": [
-        "webhooks/update-booking-status",
-        "webhooks/trip-message-updates",
-        "webhooks/create-webhook", 
-        "webhooks/get-webhooks",
-        "webhooks/delete-webhook"
-      ]
-    },
-    
-    {
-      "group": "Manage Trip",
-      "pages": [
-        "manage/cancel-trip-booking",
-        "manage/modify-trip-booking",
-        "manage/send-a-trip-message"
+        "quote/create-quote-from-cta", 
+        "quote/delete-quote"
       ]
     },
     {

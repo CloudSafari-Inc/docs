@@ -46,7 +46,6 @@ This endpoint provides a streamlined version of the [Get Public Pricing for Trip
                 </ParamField>
             </Expandable>
         </ParamField>
-
     </Expandable>
 </ParamField>
 <ParamField body="travellers" type="object" required>
@@ -64,34 +63,38 @@ This endpoint provides a streamlined version of the [Get Public Pricing for Trip
         </ParamField>
     </Expandable>
 </ParamField>
+<ParamField body="referral_code" type="string" required>
+    Referral code for promotion.
+</ParamField>
 
 <RequestExample>
   ```json
 {
-  "trip_id": 123,
-  "trip_start_date": "2023-09-15T00:00:00.000Z",
-  "extra_costs": {
+    "trip_id": 123,
+    "trip_start_date": "2023-09-15T00:00:00.000Z",
+    "extra_costs": {
     "trip_extras": [
-      {
+        {
         "extra_id": 1,
         "units": 2
-      }
+        }
     ],
     "day_extras": [
-      {
+        {
         "day_id": 1,
         "extra_id": 2,
         "units": 1
-      }
+        }
     ]
-  },
-  "travellers": [
-    {
-      "date_of_birth": "1990-01-01T00:00:00.000Z",
-      "citizenship": "Foreigner",
-      "uuid": "123e4567-e89b-12d3-a456-426614174000"
-    }
-  ]
+    },
+    "travellers": [
+        {
+            "date_of_birth": "1990-01-01T00:00:00.000Z",
+            "citizenship": "Foreigner",
+            "uuid": "123e4567-e89b-12d3-a456-426614174000"
+        }
+    ],
+    "referral_code": ""
 }
 ```
 </RequestExample>
@@ -108,12 +111,6 @@ This endpoint provides a streamlined version of the [Get Public Pricing for Trip
 <ResponseField name="Currency" type="string">
     An enum string for the currency that the trip cost was quoted in
 </ResponseField>
-
-        
-          
-  
-         
-       
 
 <ResponseExample>
 ```json

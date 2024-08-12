@@ -1,0 +1,134 @@
+---
+title: 'Delete Quote'
+api: 'POST https://api3.cloudsafaris.com/v1/quote/delete-quote'
+---
+### Header Parameters
+<ParamField header="CloudSafaris-API-Version" type="string" default="v1">
+  Currently the only acceptable value is `v1`.
+</ParamField>
+
+### Request Body Parameters
+
+<ParamField body="Id" type="number" required>
+  The quote's CloudSafaris ID. 
+</ParamField>
+<ParamField body="Name" type="string" required>
+  The name of the quote. 
+</ParamField>
+<ParamField body="OrgId" type="number" required>
+  Your CloudSafaris organization ID
+</ParamField>
+<ParamField body="CreatedDate" type="string" required>
+  The date (isoString) that the quote was created.
+</ParamField>
+<ParamField body="UpdatedDate" type="string" required>
+  The date (isoString) that the quote was last updated.
+</ParamField>
+<ParamField body="Status" type="string" required>
+  An enum string describing the status of the quote lifecycle. Availble options are: ["Lead", "Qualified", "Proposal", "Closed", "Lost", "Revisit"]
+</ParamField>
+<ParamField body="Notes" type="string" required>
+  Any notes created for this quote. 
+</ParamField>
+<ParamField body="Travellers" type="object[]" required>
+  <Expandable defaultOpen={true}>
+    <ParamField body="Id" type="number" required>
+      The traveller's ID. 
+    </ParamField>
+    <ParamField body="Name" type="string" required>
+      The name of the quote. 
+    </ParamField>
+    <ParamField body="Channel" type="string" required>
+      Describes the channel which the lead came from (i.e. Instagram, Paid Ads, etc.) 
+    </ParamField>
+    <ParamField body="CitizenshipType" type="string" required>
+      Describes the type of citizen this traveller is relative to the country theyre visiting. Available options are: ["East African Citizen", "Expatriate", "Foreigner", "Kenyan Resident", "Kenyan Citizen", "East African Resident", "Tanzanian Resident", "Crew Fee", "Rest of Africa", "Tanzanian Citizen"]  
+    </ParamField>
+    <ParamField body="Email" type="string" required>
+      Customer's email address. 
+    </ParamField>
+    <ParamField body="Notes" type="string" required>
+      Notes about the traveller.
+    </ParamField>
+    <ParamField body="OrgId" type="string" required>
+      Your CloudSafaris organization ID. 
+    </ParamField>
+  </Expandable>
+</ParamField>
+<ParamField body="Customers" type="object[]" required>
+  The individual, or persons, responsible for confirmation and payment of the trip. 
+  <Expandable defaultOpen={true}>
+    <ParamField body="Id" type="number" required>
+      The customer's ID. 
+    </ParamField>
+    <ParamField body="Name" type="string" required>
+      The name of the quote. 
+    </ParamField>
+    <ParamField body="Channel" type="string" required>
+      Describes the channel which the lead came from (i.e. Instagram, Paid Ads, etc.) 
+    </ParamField>
+    <ParamField body="CitizenshipType" type="string" required>
+      Describes the type of citizen this customer is relative to the country theyre visiting. Available options are: ["East African Citizen", "Expatriate", "Foreigner", "Kenyan Resident", "Kenyan Citizen", "East African Resident", "Tanzanian Resident", "Crew Fee", "Rest of Africa", "Tanzanian Citizen"]  
+    </ParamField>
+    <ParamField body="Email" type="string" required>
+      Customer's email address. 
+    </ParamField>
+    <ParamField body="Notes" type="string" required>
+      Notes about the customer.
+    </ParamField>
+    <ParamField body="OrgId" type="string" required>
+      Your CloudSafaris organization ID. 
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<RequestExample>
+```json
+    {
+        "Id": 123,
+        "OrgId": 10, 
+        "Name": "John & Jane Doe: 5 Days Tanzania",
+        "CreatedDate": "2024-04-01T00:00:00.000Z", 
+        "UpdatedDate": "2024-04-01T00:00:00.000Z", 
+        "Status": "Qualified", 
+        "Notes": "Referral from past client", 
+        "Travellers": [
+          {
+            "Id": 6, 
+            "Name": "John Doe", 
+            "Channel": "Referral", 
+            "CitizenshipType": "Foreigner",
+            "Email": "johndoe@gmail.com", 
+            "Notes": "", 
+            "OrgId": 10
+          },
+          // Jane Doe
+        ], 
+        "Customers": [
+          {
+            "Id": 6, 
+            "Name": "John Doe", 
+            "Channel": "Referral", 
+            "CitizenshipType": "Foreigner",
+            "Email": "johndoe@gmail.com", 
+            "Notes": "", 
+            "OrgId": 123
+          }
+        ]
+    }
+```
+</RequestExample>
+
+### Response Body Parameters
+
+<ResponseField name="success" type="boolean">
+    Boolean field confirming the quote was successfully created.
+</ResponseField>
+
+<ResponseExample>
+```json
+{
+    "success": true
+}
+```
+</ResponseExample>
