@@ -48,6 +48,7 @@
       "group": "Trips",
       "pages": [
         "trips/get-all-trips",
+        "trips/get-all-scheduled-trips",
         "trips/get-all-short-trips",
         "trips/get-trip-with-id",
         "trips/get-trips-with-ids",

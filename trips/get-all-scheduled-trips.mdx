@@ -1,0 +1,491 @@
+---
+title: 'Get All Scheduled Trips'
+api: 'POST https://api3.cloudsafaris.com/v1/trips/get-all-scheduled-trips'
+---
+
+### Header Parameters
+<ParamField header="CloudSafaris-API-Version" type="string" default="v1">
+  Currently the only acceptable value is `v1`.
+</ParamField>
+
+
+### Request Body Parameters
+
+<ParamField body="limit" type="number">
+  The limit on the number of trips to return.
+</ParamField>
+
+<ParamField body="offset" type="number" default={0}>
+    If requesting another set of trips, this will apply the offset to the next set of trips.
+</ParamField>
+
+<ParamField body="countries" type="string[]" default={[]}>
+    An array of string values of either `TZ` or `KE`, or both.
+</ParamField>
+
+<ParamField body="max_price" type="number" default={10000}>
+    The maximum price of the trips that are returned within a given calendar year. The prices are per person, and based on 2 travellers.
+    For example if you set this as `3000` only packages that have a max price under `3000` will be returned.
+</ParamField>
+
+<ParamField body="min_price" type="number" default={0}>
+    The minimum price of the trips that are returned within a given calendar year. The prices are per person, and based on 2 travellers.
+    For example if you set this as `3000` only packages that have a min price over `3000` will be returned.
+</ParamField>
+
+<ParamField body="required_guides" type="string[]" default={[]}>
+    An array of string values of either `SAFARI` or `KILIMANJARO`, or both. This will return trips that are associated with the required guide tags that are passed.
+    For example, passing in `["KILIMANJARO"]` will only return trips that require a guide for Kilimanjaro.
+</ParamField>
+
+<ParamField body="destinations" type="number[]" default={[]}>
+    The ids of the destinations. If supplied this will only return trips that contain at least one of the given destination ids.
+</ParamField>
+
+<ParamField body="properties" type="number[]" default={[]}>
+    The ids of the properties. If supplied this will only return trips that contain at least one of the given properties.
+</ParamField>
+
+<ParamField body="suppliers" type="number[]" default={[]}>
+    The ids of the desired suppliers. THis will return only trips provided by the chosen suppliers.
+</ParamField>
+
+<ParamField body="date" type="string" required>
+  The desired start date (isoString) of the trip.
+</ParamField>
+
+<ParamField body="days" type="number">
+  The desired maximum length of the trip
+</ParamField>
+
+<ParamField body="number_of_travellers" type="number" default={2}>
+  The number of travellers on the trip
+</ParamField>
+
+<ParamField body="featured" type="boolean">
+  Return only featured trips. Featured trips are designated by CloudSafaris based on popularity, trending, or promoted.
+</ParamField>
+
+<ParamField body="traveller_preferences" type="enum[]">
+    The travellers travel style preferences. The available options are: ["Wildlife", "Culture", "Photography", "Relaxation", "Active", "Mountain Climbing", "Beach"]
+</ParamField>
+
+<ParamField body="traveller_type" type="enum[]" optional>
+    Descriptor for the type of traveller(s) on the of trip: ["Friends", "Family", "Couples", "Solo"]
+</ParamField>
+
+<RequestExample>
+  ```json
+{
+    "limit": 2,
+    "offset": 10,
+    "countries": ["KE"],
+    "max_price": 1500,
+    "min_price": 1000, 
+    "required_guides": ["SAFARI"], 
+    "destinations": [3], 
+    "properties": [1, 2], 
+    "suppliers": [1], 
+    "date": "2024-10-05T14:48:00.000Z", 
+    "days": 7, 
+    "number_of_travellers": 2,
+    "featured": false, 
+    "traveller_preferences": ["Wildlife"],
+    "traveller_type": ["Couples"]
+}
+  ```
+</RequestExample>
+
+
+### Response Body Parameters
+<ResponseField name="total_length" type="number">
+    The total number of trips in our database
+</ResponseField>
+<ResponseField name="filtered_length" type="number">
+    The number of trips returned after any filters or length limits are applied
+</ResponseField>
+<ResponseField name="trips" type="Trip Object Array">
+    <Expandable defaultOpen={true}>
+        <ResponseField name="id" type="number">
+            The trip id is the unique id of the trip returned.
+        </ResponseField>
+
+        <ResponseField name="scheduled_dates" type="string[]">
+            Scheduled dates of departure for this trip. This field is nullable
+        </ResponseField>
+
+        <ResponseField name="name" type="string">
+            The name of the the trip.
+        </ResponseField>
+
+        <ResponseField name="trip_overview" type="string">
+            The overview of the trip (overall description).
+        </ResponseField>
+
+        <ResponseField name="pricing" type="object">
+            <Expandable defaultOpen={true}>
+                <ResponseField name="price" type="number">
+                    Price for the trip.
+                </ResponseField>
+                <ResponseField name="currency" type="string">
+                    The currency for the low and high values. I.e. `USD`.
+                </ResponseField>
+            </Expandable>
+        </ResponseField>
+
+        <ResponseField name="included" type="string[]">
+            What's included on the trip.
+        </ResponseField>
+
+        <ResponseField name="excluded" type="string[]">
+            What's excluded from the trip.
+        </ResponseField>
+
+        <ResponseField name="minimum_travellers" type="number">
+            The minimum number of travellers required to book the trip.
+        </ResponseField>
+
+        <ResponseField name="suppliers" type="object[]">
+            <Expandable defaultOpen={true}>
+                <ResponseField name="name" type="string">
+                    The name of the supplier (local tour company) to fulfill the trip.
+                </ResponseField>
+                <ResponseField name="logo_url" type="string">
+                    The URL for the logo of the supplier (local tour company).
+                </ResponseField>
+            </Expandable>
+        </ResponseField>
+
+        <ResponseField name="image_url" type="string[]">
+            The URLs of the images that can be used for this trip.
+        </ResponseField>
+
+        <ResponseField name="file_urls" type="string[]">
+            The URLs for any files associated with this trip.
+        </ResponseField>
+
+        <ResponseField name="trip_extras" type="object[]">
+            <Expandable defaultOpen={true}>
+
+                <ResponseField name="id" type="number">
+                    The id of the extra.
+                </ResponseField>
+                
+                <ResponseField name="name" type="string">
+                    The name of the extra.
+                </ResponseField>
+
+                <ResponseField name="description" type="string">
+                    The description for the extra.
+                </ResponseField>
+
+                <ResponseField name="optional" type="boolean">
+                    Whether the extra is optional or included by default in the trip.
+                </ResponseField>
+
+                <ResponseField name="per_unit" type="boolean">
+                    Whether the extra is per unit, or if pricing is different based on the traveller.
+                </ResponseField>
+
+                <ResponseField name="multiple_units" type="boolean">
+                    Whether the traveller is allowed to add multiple units.
+                </ResponseField>
+
+                <ResponseField name="max_travellers" type="number">
+                    The maximum number of travellers that this extra will apply to.
+                    For example, a vehicle could have a maximum capacity of 4 travellers.
+                </ResponseField>
+            </Expandable>
+        </ResponseField>
+
+        <ResponseField name="days" type="object[]">
+            <Expandable defaultOpen={true}>
+                <ResponseField name="id" type="number">
+                    The id corresponding to the day of the trip.
+                </ResponseField>
+
+                <ResponseField name="title" type="string">
+                    The title corresponding to the day.
+                </ResponseField>
+
+                <ResponseField name="description" type="string">
+                    The description for the day.
+                </ResponseField>
+
+                <ResponseField name="extra_details" type="string">
+                    Any extra details that are specified for the day.
+                </ResponseField>
+
+                <ResponseField name="meals" type="string[]">
+                    The meals and drinks that are included for the day.
+                </ResponseField>
+
+                <ResponseField name="properties" type="number[]">
+                    The property ids that are associated with the day.
+                </ResponseField>
+
+                <ResponseField name="destinations" type="number[]">
+                    The destination ids that are associated with the day.
+                </ResponseField>
+
+                <ResponseField name="activities" type="object[]">
+                    <Expandable defaultOpen={true}>
+                        <ResponseField name="id" type="number">
+                        </ResponseField>
+                        <ResponseField name="optional" type="boolean">
+                            Whether the activity is optional for the user or included by default.
+                        </ResponseField>
+                    </Expandable>
+                </ResponseField>
+
+                <ResponseField name="day_extras" type="object[]">
+                    <Expandable defaultOpen={true}>
+                        <ResponseField name="id" type="number">
+                        </ResponseField>
+                        <ResponseField name="name" type="string">
+                        </ResponseField>
+                        <ResponseField name="description" type="string">
+                        </ResponseField>
+                        <ResponseField name="optional" type="boolean">
+                            Flag identifying the extra is optional or included by default.
+                        </ResponseField>
+                        <ResponseField name="per_unit" type="number">
+                            Whether this is a per unit cost or if the cost will apply based on the travellers.
+                        </ResponseField>
+                        <ResponseField name="multiple_units" type="boolean">
+                            Whether the traveller is able to select for multiple units or not.
+                        </ResponseField>
+                        <ResponseField name="max_travellers" type="number">
+                            The maximum travellers for the given extra. For example, a vehicle may only take a maximum of 4 travellers.
+                        </ResponseField>
+                    </Expandable>
+                </ResponseField>
+
+                <ResponseField name="transfers" type="object[]">
+                    <Expandable defaultOpen={true}>
+                        <ResponseField name="initial_id" type="number">
+                            The destination id of the initial destination. If `0` is returned back then this can either be an accommodation from the day before, or a general pick-up location.
+                        </ResponseField>
+                        <ResponseField name="final_id" type="number">
+                            The destination id of the final destination for the transfeer. If `0` is returned back then this can either be an accommodation for the night or a general drop-off location.
+                        </ResponseField>
+                        <ResponseField name="transfer_type" type="string">
+                            The type of transfer between the initial and final destination. Possible values are below:
+                            `Vehicle`, `Flight`, `Hike`, `Walk`, `Boat`, `Trek`
+                        </ResponseField>
+                    </Expandable>
+                </ResponseField>
+            </Expandable>
+        </ResponseField>
+            
+        <ResponseField name="countries" type="string[]">     
+            An array of country enums where this trip takes place
+        </ResponseField>
+
+        <ResponseField name="pick_up_location" type="object[]">            
+            <Expandable defaultOpen={true}>
+                <ResponseField name="latitude" type="number">
+                    The latitude of the pickup location
+                </ResponseField>
+                <ResponseField name="longitude" type="number">
+                    The longitude of the pickup location
+                </ResponseField>
+                <ResponseField name="note" type="string">
+                    A note about the pickup, providing more detail about the location
+                </ResponseField>
+                <ResponseField name="radius" type="number">
+                    The radius outlining the bounds of possible area for pickup
+                </ResponseField>
+                <ResponseField name="location_max_time" type="string">
+                    The latest a traveller could be picked up from this location
+                </ResponseField>
+            </Expandable>
+        </ResponseField>
+        <ResponseField name="drop_off_location" type="object[]">            
+            <Expandable defaultOpen={true}>
+                <ResponseField name="latitude" type="number">
+                    The latitude of the drop-off location
+                </ResponseField>
+                <ResponseField name="longitude" type="number">
+                    The longitude of the drop-off location
+                </ResponseField>
+                <ResponseField name="note" type="string">
+                    A note about the drop-off, providing more detail about the location
+                </ResponseField>
+                <ResponseField name="radius" type="number">
+                    The radius outlining the bounds of possible area for drop-off
+                </ResponseField>
+                <ResponseField name="location_max_time" type="string">
+                    The latest a traveller could be dropped-off at this location
+                </ResponseField>
+            </Expandable>
+        </ResponseField>
+        <ResponseField name="trip_category" type="string"> 
+            Category of the trip as defined by the supplier.   
+        </ResponseField>      
+        <ResponseField name="route" type="object[]"> 
+            <Expandable defaultOpen={true}>
+                <ResponseField name="destination_id" type="number">
+                </ResponseField>
+                <ResponseField name="destination_name" type="string">
+                </ResponseField>
+                <ResponseField name="destination_type" type="string">
+                </ResponseField>
+                <ResponseField name="latitude" type="number">
+                </ResponseField>
+                <ResponseField name="longitude" type="number">
+                </ResponseField>
+            </Expandable>   
+        </ResponseField> 
+        <ResponseField name="promos" type="object[]"> 
+            <Expandable defaultOpen={true}>
+                <ResponseField name="Code" type="string">
+                </ResponseField>
+                <ResponseField name="FixedDiscount" type="number">
+                    If the discount is a fixed amount (i.e. $100 off) as defined by the ApplyPercentage flag, it will be set here.
+                </ResponseField>
+                <ResponseField name="PercentageDiscount" type="number">
+                    If the discount is a fixed amount (i.e. 10% off) as defined by the ApplyPercentage flag, it will be set here.
+                </ResponseField>
+                <ResponseField name="ApplyPercentage" type="boolean">
+                    Flag defining whether to apply fixed or percentage discount. 
+                </ResponseField>
+                <ResponseField name="AtCost" type="boolean">
+                    Flag for promotions selling packages at cost. 
+                </ResponseField>
+                <ResponseField name="Expiry" type="string">
+                    Date isoString defining the expiration date of the promotion. 
+                </ResponseField>
+            </Expandable>   
+        </ResponseField>
+        <ResponseField name="short_description" type="string">
+            A short description for the trip. 
+        </ResponseField>  
+        <ResponseField name="why_this_trip" type="string">
+            A call to action for this trip.
+        </ResponseField>  
+        <ResponseField name="traveller_type" type="string[]">
+            Descriptor for the type of traveller(s) on the of trip: ["Friends", "Family", "Couples", "Solo"]
+        </ResponseField>  
+        <ResponseField name="traveller_preferences" type="string[]">
+            The travellers travel style preferences. The available options are: ["Wildlife", "Culture", "Photography", "Relaxation", "Active", "Mountain Climbing", "Beach"]
+        </ResponseField>  
+        <ResponseField name="popularity_tag" type="string">
+            The available options are: ["Best Seller", "Fan Favourite", "Top Rated", "Most Popular", "Highly Recommended", "Trending Now", "Must-see", "Editor's Choice", "Hot Deal", "Ultimate Experience", "Exclusive Offer"]
+        </ResponseField>
+    </Expandable>
+</ResponseField>
+
+
+<ResponseExample>
+```json
+{ 
+    "total_length": 25,
+    "filtered_length": 1, 
+    "trips": [
+        {
+            "id": 11,
+            "name": "5 Day Tanzanian Safari, Savannah Tours",
+            "scheduled_dates": ["2024-11-05T14:48:00.000Z", "2024-10-12T14:48:00.000Z"]
+            "trip_overview": "A comprehensive 5-day safari experience starting from Arusha to Tarangire National Park with game drives and accommodations at Burunge Tented Lodge, among other destinations.",
+            "pricing": {
+                "price": 1200,
+                "currency": "USD"
+            },
+            "included": ["4x4 Private safari vehicle", "Professional guide", "Park Fees", "Accommodations"],
+            "excluded": ["Driver / guide tips", "Airport transfers", "Anything not explicitly included"],
+            "minimum_travellers": 2,
+            "suppliers": [
+            {
+                "name": "Savannah Tours",
+                "logo_url": "https://example.com/logo_url.jpg"
+            }
+            ],
+            "image_urls": [
+                "https://cloudsafaris.com/path/to/image1.jpg",
+                "https://cloudsafaris.com/path/to/image2.jpg"
+            ],
+            "file_urls": [],
+            "trip_extras": [
+            {
+                "id": 1,
+                "name": "4x4 Safari Cruiser",
+                "description": "Included as part of the package",
+                "optional": false,
+                "per_unit": false,
+                "multiple_units": false,
+                "max_travellers": 0
+            },
+            {
+                "id": 2,
+                "name": "Airport Transfer in a 4x4 Safari Cruiser",
+                "description": "Optional transfer from JRO to Arusha",
+                "optional": true,
+                "per_unit": true,
+                "multiple_units": false,
+                "max_travellers": 4
+            },
+            {
+                "id": 3,
+                "name": "Accommodation Extension at Mount Meru Game Lodge",
+                "description": "Optional extra nights available in different board bases",
+                "optional": true,
+                "per_unit": true,
+                "multiple_units": true,
+                "max_travellers": 0
+            }
+            ],
+            "days": [
+            {
+                "id": 1,
+                "title": "Arusha to Tarangire National Park",
+                "description": "Depart from Arusha and drive to Tarangire National Park for a full day of game drives.",
+                "extra_details": "",
+                "meals": ["Lunch", "Dinner"],
+                "properties": [12],
+                "destinations": [20],
+                "activities": [],
+                "day_extras": [],
+                "transfers": [
+                    {
+                        "initial_id": 0,
+                        "final_id": 20,
+                        "transfer_type": "Vehicle", 
+                        "moment": "MORNING"
+                    }
+                ]
+            }
+            // Additional days follow a similar structure
+            ],
+            "countries": ["TZ"], 
+            "pick_up_location": {
+                latitude: -3.429406, 
+                longitude: 37.074461, 
+                note: "Kilimanjaro International Airport",
+                radius: 50,
+                location_max_time: "08:00:00",         
+            }, 
+            "drop_off_location": {
+                latitude: -3.429406, 
+                longitude: 37.074461, 
+                note: "Kilimanjaro International Airport",
+                radius: 50,
+                location_max_time: "08:00:00",         
+            }, 
+            "trip_category": "",
+            "route": [],
+            "promos": [], 
+            "short_description": "A comprehensive 5-day safari experience starting from Arusha to Tarangire National Park",
+            "why_this_trip": "",
+            "traveller_type": ["Friends", "Family", "Couples"],
+            "traveller_preferences": ["Wildlife", "Culture", "Photography", "Relaxation", "Active"],
+            "popularity_tag": "Best Seller"
+        }
+    ]
+}
+```
+</ResponseExample>
+
+
+
+
