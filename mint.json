@@ -1,5 +1,5 @@
 {
-  "name": "CloudSafaris API Documentation",
+  "name": "Simbas.AI Documentation",
   "logo": {
     "dark": "https://cloudsafaris.com/combo-logo-white.png",
     "light": "https://cloudsafaris.com/combo-logo-neutral-900.png"
@@ -22,13 +22,13 @@
   ],
   "topbarCtaButton": {
     "name": "Home",
-    "url": "https://cloudsafaris.com"
+    "url": "https://simbas.ai"
   },
   "anchors": [
     {
       "name": "Home",
       "icon": "house",
-      "url": "https://cloudsafaris.com"
+      "url": "https://simbas.ai"
     },
     {
       "name": "Contact Us",
