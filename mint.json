@@ -43,6 +43,15 @@
         "introduction",
         "quickstart"
       ]
+    },
+    {
+      "group": "AI Chat",
+      "pages": [
+        "index",
+        "navigation",
+        "chat",
+        "notepad"
+      ]
     }
   ],
   "api": {
