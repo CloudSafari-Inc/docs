@@ -47,10 +47,10 @@
     {
       "group": "AI Chat",
       "pages": [
-        "index",
-        "navigation",
-        "chat",
-        "notepad"
+        "ai-chat/index",
+        "ai-chat/navigation",
+        "ai-chat/chat",
+        "ai-chat/notepad"
       ]
     }
   ],
