@@ -3,92 +3,126 @@ title: "Quickstart"
 description: "Supplier pricing and how to use it within the chat."
 ---
 
-Within the [Simbas.ai](http://Simbas.ai) dashboard is a section for Supplier Pricing Data. Supplier Pricing Data refers to other pricing information from suppliers that you want added to the AI Chat to make it accessible for your team to get quick-access to information (for both nett and rack rates).
+Within the [Simbas.AI](http://Simbas.AI) dashboard, the **Supplier Pricing Data** section stores pricing information from your suppliers.
+
+This data allows your team to quickly access and query **nett** and **rack rates** directly through the **AI Chat**, ensuring faster and more accurate responses when building itineraries or quoting clients.
 
 ### Navigating to Supplier Pricing
 
-To get to the Supplier Pricing Data, click on "Supplier Pricing Data" on the navigation within the [simbas.ai](http://simbas.ai) dashboard (https://simbas.ai/dashboard). 
+To access this section, go to the dashboard:
+
+👉 https://simbas.ai/dashboard
+
+Then, click **“Supplier Pricing Data”** in the navigation menu.
 
 ![Screenshot2025 10 30at10 59 13AM Pn](/images/Screenshot2025-10-30at10.59.13AM.png)
 
 ### Adding Supplier Pricing Data
 
-To add new supplier pricing data, click on the "+ New" button on the top right of the screen which will open a modal to add in the supplier pricing data.
+To add new supplier pricing data, click **“+ New”** in the top-right corner of the screen.
+
+This will open a modal where you can enter all relevant supplier pricing details.
 
 ![Screenshot2025 10 30at11 00 33AM Pn](/images/Screenshot2025-10-30at11.00.33AM.png)
 
-There are a few fields within the supplier pricing data you'll need to set.
+There are several required fields to complete when creating supplier pricing data.
 
 <AccordionGroup>
   <Accordion title="Name">
-    This is the identifier for the supplier pricing data. Make a descriptive name for the supplier pricing data so that you can identify what information this pricing data applies to, and so that you can search via the AI Chat to get the supplier pricing data.\
-    \
-    I.e. If you name a file "Serengeti Park Fees", you'll be able to ask within the AI Chat for "Serengeti Park Fees" which will reference the supplier pricing data.
+    This is the main **identifier** for the supplier pricing data.
+
+    Choose a **clear, descriptive name** so you can easily identify and retrieve it through the AI Chat.
+
+    > _Example:_ If you name the entry **“Serengeti Park Fees”**, you can simply ask the AI Chat for “Serengeti Park Fees” to access that information.
   </Accordion>
   <Accordion title="Supplier Name">
-    This is the name of the supplier for which the data belongs to.
+    This is the **name of the supplier** associated with the pricing data.
 
-    For example, if you upload data for Miracle Experiences (I.e. the Balloon Safari) then this field would be "Miracle Experiences" which is a reference to the supplier.
+    > _Example:_ If the data belongs to **Miracle Experiences** (e.g., Balloon Safari), enter **“Miracle Experiences”** here.
   </Accordion>
   <Accordion title="Sale Rates">
-    These are the public facing rates (I.e. Rack rates) for the supplier pricing data. When you ask for the rates you can ask for the public rates which will reference these _Sale Rates_. In most cases, this acts as a good reference point so you have an upper bound on what to sell a particular item for.
+    These represent the **public-facing (rack) rates** for the supplier’s pricing data.
 
-    You can write out this information as plain text. It helps to organize this information via bullet points.
+    When you ask the AI Chat for “public rates,” it references these sale rates — serving as the **upper bound** for pricing.
+
+    You can write this information as **plain text** and organize it using **bullet points** for clarity.
   </Accordion>
   <Accordion title="Nett Rates">
-    These are the private rates for the supplier pricing data. When you ask for private rates within the chat, it will tell you the nett rates to be charged when the supplier is invoicing you. This acts as a reference so you know how much you're going to make on a trip.
+    These are the **private (nett) rates** charged by the supplier when invoicing you.
 
-    You can write out this information as plain text. It helps to organize this information via bullet points.
+    When you ask for “private rates” in the AI Chat, it will display these nett rates — helping you calculate **profit margins** and track your actual costs.
+
+    Like sale rates, this information can be entered as **plain text**, preferably formatted with **bullet points**.
   </Accordion>
   <Accordion title="Pricing Rules">
-    Pricing rules are any information or rules that indicate how the pricing needs to be calculated. For example this could include:
+    Pricing rules define how a particular rate or item should be applied or calculated.
 
-    - The minimum number of travellers that you need to purchase the particluar item
-    - How far in advance the item needs to be purchased for it to be valid
-    - Seasonal requirements (if the item is only available during specific seasons)
-    - If the item needs to be purchased with another item
+    Examples include:
 
-    There are many examples of pricing rules. This field is meant to be exhaustive to cover any pricing rule that may be required in reference to the supplier pricing data.
+    - Minimum number of travelers required to purchase the item
+    - Advance purchase requirements
+    - Seasonal availability (e.g., only valid during certain months)
+    - Dependencies (e.g., must be purchased with another item)
 
-    You can write out this information as plain text. It helps to organize this information via bullet points.
+    This field is **flexible and exhaustive** — use it to document **any rules or conditions** tied to the supplier’s pricing.
+
+    Plain text with **bullet points** is recommended for organization.
   </Accordion>
   <Accordion title="Supplier Reservation Email">
-    This is the email from the supplier for which you need to make the booking or reservation. 
+    Enter the **email address** used to make reservations or bookings with the supplier.
   </Accordion>
   <Accordion title="Booking Information Required">
-    This field indicates the booking information that's required when purchasing the particular item from the supplier (I.e. number of adults, number of children, ages of children, if on a honeymoon, if they want a full buyout of a hot air balloon, etc.).
+    Specify the **information needed to complete a booking** for this item.
 
-    You can write out this information as plain text. It helps to organize this information via bullet points.
+    Examples include:
+
+    - Number of adults and children
+    - Ages of children
+    - Honeymoon or special occasion details
+    - Full buyout options (e.g., private hot air balloon)
+
+    As with other fields, plain text with **bullet points** works best.
   </Accordion>
   <Accordion title="Optional Checkbox">
-    In this specific case, the "Optional" checkbox refers to if the supplier item is mandatory or not. This is more specific to the dynamic itineraries which is soon to be released. For now, this won't have any influence over the AI Chat and the access to information.
+    Indicates whether the supplier item is **mandatory or optional**.
+
+    This setting is primarily used for the upcoming **Dynamic Itineraries** feature and does not currently affect AI Chat functionality.
   </Accordion>
   <Accordion title="Markup Checkbox">
-    Similar to the "Optional" checkbox, this is specific to the future release for dynamic itineraries which determines whether the price to quote will be marked up or if it will be sold as is. 
+    Determines whether the item should be **marked up** or **sold as-is** in future Dynamic Itinerary releases.
 
-    For example, in the case of Government Park Fees, you may choose to not add a markup ontop of this.
+    > _Example:_ For **Government Park Fees**, you might choose _not_ to apply a markup.
   </Accordion>
   <Accordion title="Fallback Nett Markup">
-    Fallback nett markup is useful when there's no "Sale" (Rack) rates available. In this case, we can specify a default markup to markup the nett pricing by. The markup will be applied to the nett rates when distributing out the rates.
+    This field defines a **default markup** to apply when no **Sale (Rack)** rates are available.
 
-    You can either choose to markup the Nett Rates by a percentage or a fixed amount. Percentage will add ontop the specified percentage that you want to markup the Nett Rates by. Fixed amount will add ontop a fixed amount to the Nett Rates.
+    It allows you to automatically adjust the **Nett Rates** by either:
+
+    - A **percentage** (adds the specified % on top of the Nett Rate), or
+    - A **fixed amount** (adds a set value to the Nett Rate)
+
+    This ensures consistent pricing even when public rates are missing.
 
     ![Screenshot2025 10 30at11 22 49AM Pn](/images/Screenshot2025-10-30at11.22.49AM.png)
   </Accordion>
 </AccordionGroup>
 
 
-Once you've added all of the information for the supplier pricing data, click the "Save" button which will save the supplier pricing data to your organization.
+Once all information is filled out, click **“Save”** to store the data under your organization.
 
-Screenshot below shows the _Serengeti National Park Fees_ added to the Supplier Pricing table.
+> _Example:_ The screenshot below shows **Serengeti National Park Fees** added to the Supplier Pricing Data table.
 
 ![Screenshot2025 10 30at11 29 42AM Pn](/images/Screenshot2025-10-30at11.29.42AM.png)
 
 ### Accessing Data from the AI Chat
 
-To access the supplier pricing data from the AI Chat, simply search for the supplier pricing data by the name (it doesn't have to be exact, but the closer the match is, the easier it will be to access the information). Once you search for the particular supplier pricing data, you can ask further questions to get any or all of the information that was set when adding the supplier pricing data.
+To retrieve supplier pricing data through the **AI Chat**, simply **search by name**.
 
-In the screenshot below, we have a supplier pricing data added with the name "Serengeti National Park Fees". Within the AI Chat, we're able to search for this to get all information regarding the Serengeti National Park Fees.
+An exact match isn’t required — the closer the name, the easier it is for the system to identify and return the correct data.
+
+Once located, you can ask follow-up questions to access **any or all of the details** saved when creating that supplier pricing entry.
+
+> _Example:_ In the screenshot below, the supplier pricing data titled **“Serengeti National Park Fees”** is searched within AI Chat to display all related information.
 
 ![Screenshot2025 10 30at11 29 42AM Pn](/images/Screenshot2025-10-30at11.29.42AM.png)
 
