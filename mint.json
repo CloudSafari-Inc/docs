@@ -52,6 +52,12 @@
         "ai-chat/chat",
         "ai-chat/notepad"
       ]
+    },
+    {
+      "group": "Supplier Pricing",
+      "pages": [
+        "supplier-pricing/index"
+      ]
     }
   ],
   "api": {
