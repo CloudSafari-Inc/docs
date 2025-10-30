@@ -58,6 +58,12 @@
       "pages": [
         "supplier-pricing/index"
       ]
+    },
+    {
+      "group": "Templates",
+      "pages": [
+        "templates/index"
+      ]
     }
   ],
   "api": {
