@@ -64,6 +64,13 @@
       "pages": [
         "templates/index"
       ]
+    },
+    {
+      "group": "Itinerary",
+      "pages": [
+        "itinerary/index",
+        "itinerary/edit"
+      ]
     }
   ],
   "api": {
